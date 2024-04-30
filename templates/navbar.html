@@ -1,0 +1,58 @@
+{% load static %}
+
+
+<nav
+    class="relative flex flex-col h-[8ch] py-3 md:flex-row lg:items-end justify-between md:items-center px-5 lg:px-36 md:px-28 sm:px-10 px-4 gap-7 md:gap-0 z-30">
+    <!-- Logo section -->
+    <a href="/" class="text-decoration-none text-xl font-medium text-neutral-800 mr-8 d-flex">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="logo"
+            class="w-auto h-10 object-contain object-center">
+    </a>
+    <!-- Nav items & login events -->
+    <div id="navItems"
+        class="flex-1 hidden md:flex flex-col md:flex-row gap-x-5 gap-y-2 md:items-center md:p-0 sm:p-4 p-4 justify-between md:bg-transparent sm:bg-blue-50 bg-blue-50 md:shadow-none sm:shadow-md shadow-md rounded-md">
+        <!-- Nav items -->
+        <ul
+            class="list-none flex md:items-center sm:items-start items-start gap-x-5 gap-y-1 flex-wrap md:flex-row sm:flex-col flex-col">
+            <li>
+                <a href="#"
+                    class="text-decoration-none text-[0.95rem] font-medium text-neutral-800 hover:text-neutral-600">
+                    Courses
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <button id="btnToggle" class="block md:hidden absolute top-6 right-10 text-neutral-800">
+        <i class="fas fa-bars text-2xl"></i>
+    </button>
+</nav>
+
+<script>
+    const btnToggle = document.getElementById('btnToggle');
+    const nav = document.getElementById('navItems');
+
+    // Create a new element
+    const iconElement = document.createElement('i');
+
+    // Click button click event listener
+    btnToggle.addEventListener('click', () => {
+        nav.classList.toggle('flex');
+        nav.classList.toggle('hidden');
+
+        if (nav.classList.contains('flex')) {
+            // Set the inner HTML of the element to the desired HTML snippet
+            btnToggle.innerHTML = '<i class="fas fa-close text-2xl"></i>';
+
+            // Append the new element to an existing element in the DOM (e.g., with id 'container')
+            document.getElementById('btnToggle').appendChild(iconElement);
+
+        } else {
+            // Set the inner HTML of the element to the desired HTML snippet
+            btnToggle.innerHTML = '<i class="fas fa-bars text-2xl"></i>';
+
+            // Append the new element to an existing element in the DOM (e.g., with id 'container')
+            document.getElementById('btnToggle').appendChild(iconElement);
+        }
+    })
+</script>

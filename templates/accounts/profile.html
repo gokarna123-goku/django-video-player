@@ -1,0 +1,33 @@
+{% extends '../base.html'%}
+{% load static %}
+
+{%block titleblock%}Profile{%endblock%}
+{%block bodyblock%}
+
+<style>
+    .form-text {
+        display: none;
+    }
+</style>
+
+
+
+<div class="w-full h-screen flex-1 flex items-center justify-center mt-10">
+    <div class="w-[30%] h-auto py-10 px-8 rounded-xl border-2 border-neutral-900 shadow-md">
+        <div class="space-y-2 mb-5">
+            <h1 class="text-3xl font-bold text-neutral-100 mb-">Login</h1>
+            <p class="text-sm text-neutral-600 font-normal">
+                Welcome back Goku! Please enter your details.
+            </p>
+        </div>
+        <!-- Display user email here if the user is authenticated -->
+        {% if request.user.is_authenticated %}
+        <p class="text-indigo-600 font-semibold text-xl mt-7 text-center">
+            Email: {{request.user.email}}
+        </p>
+        {% endif %}
+    </div>
+</div>
+
+
+{%endblock%}

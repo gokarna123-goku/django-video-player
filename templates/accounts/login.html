@@ -1,0 +1,103 @@
+{% extends '../base.html'%}
+{% load static %}
+
+{%block titleblock%}Login{%endblock%}
+{%block bodyblock%}
+
+<style>
+    .form-text {
+        display: none;
+    }
+</style>
+
+
+
+<div class="w-full h-screen flex-1 flex items-center justify-center mt-10">
+    <div class="w-[30%] h-auto py-10 px-8 rounded-xl border-2 border-neutral-900 shadow-md">
+        <div class="space-y-2 mb-5">
+            <h1 class="text-3xl font-bold text-neutral-100 mb-">Login</h1>
+            <p class="text-sm text-neutral-600 font-normal">
+                Welcome back! Please enter your details.
+            </p>
+        </div>
+        <form method="post" class="w-full">
+            {%csrf_token%}
+            {% for field in form %}
+            <div class="w-full mb-4 relative">
+                <label for="{{ field.id_for_label }}" class="text-base text-neutral-500 font-medium mb-2 block">
+                    {{ field.label }}
+                </label>
+                {{field}}
+            </div>
+            {% endfor %}
+
+            <div class="w-full flex justify-end">
+                <a href="#" class="text-neutral-500 text-sm font-normal hover:text-indigo-500 ease-out duration-500">
+                    Forgot Password?
+                </a>
+            </div>
+
+            <button type="submit" class="w-full h-11 text-base font-semibold bg-indigo-600 text-neutral-50 mt-8 rounded-md">
+                Login
+            </button>
+            <p class="text-base text-neutral-600 font-normal mt-7 text-center">
+                Don't have an account?
+                <a href="{% url 'accounts:register'%}"
+                    class="text-decoration-none text-indigo-500 hover:text-indigo-600 ease-out duration-300">
+                    Register
+                </a>
+            </p>
+        </form>
+    </div>
+</div>
+
+
+<script>
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Find the password input
+        var passwordInput = document.querySelector('input[type="password"]');
+        var email = document.querySelector('#id_username');
+        email.placeholder = 'Enter your email'
+        email.type = 'email'
+        passwordInput.placeholder = 'Enter password'
+        email.className = 'w-full h-11 bg-neutral-950 outline-none px-4 text-base placeholder-neutral-700 font-normal rounded-md ring-1 ring-neutral-800 focus:ring-2 focus:ring-indigo-500 text-neutral-200'
+        passwordInput.className = 'w-full h-11 bg-neutral-950 outline-none px-4 text-base placeholder-neutral-700 font-normal rounded-md ring-1 ring-neutral-800 focus:ring-2 focus:ring-indigo-500 text-neutral-200'
+
+        if (passwordInput) {
+            // Create a button element
+
+            var toggleButton = document.createElement('i');
+            toggleButton.className = 'fa-solid fa-eye z-30 absolute right-4 top-[3.3rem] -translate-y-1/2 text-neutral-500 cursor-pointer';
+            toggleButton.type = 'button';
+            toggleButton.addEventListener('click', function () {
+
+                if (passwordInput.type == 'password') {
+                    passwordInput.type = 'text'
+                    toggleButton.className = 'fa-solid fa-eye-slash z-30 absolute right-4 top-[3.3rem] -translate-y-1/2 text-neutral-500 cursor-pointer';
+
+                }
+                else {
+                    passwordInput.type = 'password'
+                    toggleButton.className = 'fa-solid fa-eye z-30 absolute right-4 top-[3.3rem] -translate-y-1/2 text-neutral-500 cursor-pointer';
+
+                }
+
+            });
+
+            // Create a div to wrap the button
+            var buttonWrapper = document.createElement('div');
+            buttonWrapper.className = 'input-group-append d-flex justify-content-end';
+            buttonWrapper.appendChild(toggleButton);
+
+            // Insert the button wrapper after the password input
+            passwordInput.parentNode.insertBefore(buttonWrapper, passwordInput.nextSibling);
+        }
+    });
+</script>
+
+
+
+{%endblock%}
