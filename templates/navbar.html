@@ -6,7 +6,7 @@
     <!-- Logo section -->
     <div class="flex items-center">
         <a href="/" class="text-decoration-none text-xl font-medium text-neutral-800 md:mb-2 mb-0 mr-16 d-flex">
-            <h1 class="tex-xl font-bold text-indigo-500 uppercase">
+            <h1 class="tex-xl font-bold text-red-500 uppercase">
                 Gokuflix
             </h1>
         </a>
@@ -20,13 +20,13 @@
             class="list-none flex md:items-center sm:items-start items-start gap-x-5 gap-y-1 flex-wrap md:flex-row sm:flex-col flex-col">
             <li>
                 <a href="#"
-                    class="text-decoration-none text-base font-medium text-neutral-400 hover:text-indigo-500 ease-in-out duration-300">
+                    class="text-decoration-none text-base font-medium text-neutral-400 hover:text-red-500 ease-in-out duration-300">
                     Movies
                 </a>
             </li>
             <li>
                 <a href="#"
-                    class="text-decoration-none text-base font-medium text-neutral-400 hover:text-indigo-500 ease-in-out duration-300">
+                    class="text-decoration-none text-base font-medium text-neutral-400 hover:text-red-500 ease-in-out duration-300">
                     Categories
                 </a>
             </li>
@@ -38,7 +38,7 @@
                 <input type="text" placeholder="Search for movies..."
                     class="w-[85%] bg-transparent h-full px-4 outline-none placeholder-neutral-500">
                 <button
-                    class="bg-transparent w-[15%] h-full border-l-2 lg:border-neutral-700/60 border-neutral-800/60 text-base text-neutral-400 hover:text-indigo-500 ease-in-out duration-300 flex items-center justify-center">
+                    class="bg-transparent w-[15%] h-full border-l-2 lg:border-neutral-700/60 border-neutral-800/60 text-base text-neutral-400 hover:text-red-500 ease-in-out duration-300 flex items-center justify-center">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -50,7 +50,7 @@
             </a>
             {% else %}
             <a href="{% url 'accounts:login' %}"
-                class="w-fit bg-indigo-700 px-4 py-2 rounded-full text-sm font-medium text-neutral-200 hover:bg-indigo-600 ease-in-out duration-500">
+                class="w-fit bg-red-700 px-4 py-2 rounded-full text-sm font-medium text-neutral-200 hover:bg-red-600 ease-in-out duration-500">
                 Create Account
             </a>
             {% endif %}
@@ -104,11 +104,11 @@
     // Toggle fixed navbar on scroll
     window.addEventListener('scroll', () => {
         if (window.scrollY > 5) {
-            navbar.classList.add('bg-indigo-600', 'text-neutral-900', 'shadow', 'fixed', 'w-full', 'z-50', 'top-0');
+            navbar.classList.add('bg-red-600', 'text-neutral-900', 'shadow', 'fixed', 'w-full', 'z-50', 'top-0');
             navbar.classList.remove('bg-neutral-900', 'text-white');
         } else {
             navbar.classList.add('bg-neutral-900');
-            navbar.classList.remove('bg-indigo-600', 'text-neutral-900', 'shadow');
+            navbar.classList.remove('bg-red-600', 'text-neutral-900', 'shadow');
         }
     });
 </script> -->

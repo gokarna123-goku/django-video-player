@@ -22,7 +22,7 @@
         </div>
         <!-- Display user email here if the user is authenticated -->
         {% if request.user.is_authenticated %}
-        <p class="text-indigo-600 font-semibold text-xl mt-7 text-center">
+        <p class="text-red-600 font-semibold text-xl mt-7 text-center">
             Email: {{request.user.email}}
         </p>
         {% endif %}

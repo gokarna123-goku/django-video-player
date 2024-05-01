@@ -37,6 +37,11 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- 
+        - SwiperJs CSS Link
+     -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
 
     <!-- <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <link rel="stylesheet" href="{% static 'css/footer.css'%}">
@@ -73,6 +78,41 @@
     </div>
 
 
+    <!-- 
+        - SwiperJs JS Link
+     -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            loop: false,
+            // autoplay: {
+            //     delay: 3000,
+            //     disableOnInteraction: false,
+            // },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 10,
+                },
+                1024: {
+                    slidesPerView: 6,
+                    spaceBetween: 10,
+                },
+            },
+        });
+    </script>
 
 </body>
 
