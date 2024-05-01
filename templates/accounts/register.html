@@ -9,7 +9,7 @@
 </style>
 
 <div class="w-full h-screen flex-1 flex items-center justify-center mt-10">
-    <div class="w-[30%] h-auto py-10 px-8 rounded-xl border-2 border-neutral-900 shadow-md">
+    <div class="w-[28%] h-auto py-10 px-8 rounded-xl border-2 border-neutral-900 shadow-md">
         <div class="space-y-2 mb-5">
             <h1 class="text-3xl font-bold text-neutral-100 mb-">Sign Up</h1>
             <p class="text-sm text-neutral-600 font-normal">
@@ -17,7 +17,7 @@
             </p>
         </div>
         <form method="post" class="w-full">
-            {%csrf_token%}
+            {% csrf_token %}
             {% for field in form %}
             <div class="w-full mb-4 relative">
                 <label for="{{ field.id_for_label }}" class="text-base text-neutral-500 font-medium mb-2 block">

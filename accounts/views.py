@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import FormView, TemplateView
+from django.views.generic import FormView, TemplateView, CreateView
 from django.contrib.auth import authenticate, login
 from .forms import RegisterForm, LoginForm
 from .models import User
@@ -37,12 +37,13 @@ class RegisterView(FormView):
 class LoginView(FormView):
     template_name = 'accounts/login.html'
     form_class = LoginForm
+    success_url = reverse_lazy('accounts:profile')
 
     def form_valid(self, form):
         email = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
-        user = authenticate(self.request, email=email, password=password)
-        print(user, " users")
+        user = authenticate(self.request, username=email, password=password)
+        print(user)
         if user is not None:
             login(self.request, user)
             messages.success(self.request, 'Successfully Logged In!')
@@ -50,9 +51,6 @@ class LoginView(FormView):
         else:
             messages.error(self.request, 'Invalid email or password')
             return self.form_invalid(form)
-
-    def get_success_url(self):
-        return reverse_lazy('accounts:profile')
     
 
 class UserProfileView(TemplateView):

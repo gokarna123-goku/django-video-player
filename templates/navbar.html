@@ -2,12 +2,16 @@
 
 
 <nav
-    class="relative flex flex-col h-[8ch] py-3 md:flex-row lg:items-end justify-between md:items-center px-5 lg:px-36 md:px-28 sm:px-10 px-4 gap-7 md:gap-0 z-30">
+    class="relative flex flex-col md:items-center bg-neutral-900 shadow h-auto py-4 md:flex-row lg:items-end justify-between px-10 gap-7 md:gap-0 z-30">
     <!-- Logo section -->
-    <a href="/" class="text-decoration-none text-xl font-medium text-neutral-800 mr-8 d-flex">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="logo"
-            class="w-auto h-10 object-contain object-center">
-    </a>
+    <div class="flex items-center">
+        <a href="/" class="text-decoration-none text-xl font-medium text-neutral-800 mb-2 mr-16 d-flex">
+            <h1 class="tex-xl font-bold text-indigo-500 uppercase">
+                Gokuflix
+            </h1>
+        </a>
+    </div>
+
     <!-- Nav items & login events -->
     <div id="navItems"
         class="flex-1 hidden md:flex flex-col md:flex-row gap-x-5 gap-y-2 md:items-center md:p-0 sm:p-4 p-4 justify-between md:bg-transparent sm:bg-blue-50 bg-blue-50 md:shadow-none sm:shadow-md shadow-md rounded-md">
@@ -16,11 +20,41 @@
             class="list-none flex md:items-center sm:items-start items-start gap-x-5 gap-y-1 flex-wrap md:flex-row sm:flex-col flex-col">
             <li>
                 <a href="#"
-                    class="text-decoration-none text-[0.95rem] font-medium text-neutral-800 hover:text-neutral-600">
-                    Courses
+                    class="text-decoration-none text-base font-medium text-neutral-400 hover:text-indigo-500 ease-in-out duration-300">
+                    Movies
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="text-decoration-none text-base font-medium text-neutral-400 hover:text-indigo-500 ease-in-out duration-300">
+                    Categories
                 </a>
             </li>
         </ul>
+
+        <div class="flex items-center gap-x-7">
+            <div
+                class="w-[350px] h-10 bg-neutral-800 text-base font-medium text-neutral-300 flex items-center border border-neutral-800 rounded-md overflow-hidden">
+                <input type="text" placeholder="Search for movies..."
+                    class="w-[85%] bg-transparent h-full px-4 outline-none placeholder-neutral-500">
+                <button
+                    class="bg-transparent w-[15%] h-full border-l-2 border-neutral-700/60 text-base text-neutral-400 hover:text-indigo-500 ease-in-out duration-300 flex items-center justify-center">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'accounts:profile' %}" class="text-base font-medium text-neutral-400">
+                <!-- Profile image -->
+                <img src="https://source.unsplash.com/random/?women" alt="profile image"
+                    class="w-10 h-10 p-0.5 rounded-full object-cover object-center border border-neutral-800/90">
+            </a>
+            {% else %}
+            <a href="{% url 'accounts:login' %}"
+                class="w-fit bg-indigo-700 px-4 py-2 rounded-full text-sm font-medium text-neutral-200 hover:bg-indigo-600 ease-in-out duration-500">
+                Create Account
+            </a>
+            {% endif %}
+        </div>
 
     </div>
     <button id="btnToggle" class="block md:hidden absolute top-6 right-10 text-neutral-800">
