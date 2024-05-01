@@ -1,11 +1,11 @@
 {% load static %}
 
 
-<nav
+<nav id="navbar"
     class="relative flex flex-col md:items-center bg-neutral-900 shadow h-auto py-4 md:flex-row lg:items-end justify-between px-10 gap-7 md:gap-0 z-30">
     <!-- Logo section -->
     <div class="flex items-center">
-        <a href="/" class="text-decoration-none text-xl font-medium text-neutral-800 mb-2 mr-16 d-flex">
+        <a href="/" class="text-decoration-none text-xl font-medium text-neutral-800 md:mb-2 mb-0 mr-16 d-flex">
             <h1 class="tex-xl font-bold text-indigo-500 uppercase">
                 Gokuflix
             </h1>
@@ -14,7 +14,7 @@
 
     <!-- Nav items & login events -->
     <div id="navItems"
-        class="flex-1 hidden md:flex flex-col md:flex-row gap-x-5 gap-y-2 md:items-center md:p-0 sm:p-4 p-4 justify-between md:bg-transparent sm:bg-blue-50 bg-blue-50 md:shadow-none sm:shadow-md shadow-md rounded-md">
+        class="flex-1 hidden md:flex flex-col md:flex-row gap-x-5 gap-y-2 md:items-center md:p-0 sm:p-4 p-4 justify-between md:bg-transparent bg-neutral-800 md:shadow-none sm:shadow-md shadow-md rounded-md">
         <!-- Nav items -->
         <ul
             class="list-none flex md:items-center sm:items-start items-start gap-x-5 gap-y-1 flex-wrap md:flex-row sm:flex-col flex-col">
@@ -32,13 +32,13 @@
             </li>
         </ul>
 
-        <div class="flex items-center gap-x-7">
+        <div class="flex items-center gap-x-7 gap-y-5 flex-wrap">
             <div
-                class="w-[350px] h-10 bg-neutral-800 text-base font-medium text-neutral-300 flex items-center border border-neutral-800 rounded-md overflow-hidden">
+                class="w-[350px] h-10 md:bg-neutral-800 bg-neutral-900 text-base font-medium text-neutral-300 flex items-center border lg:border-neutral-800 border-neutral-900 rounded-md overflow-hidden">
                 <input type="text" placeholder="Search for movies..."
                     class="w-[85%] bg-transparent h-full px-4 outline-none placeholder-neutral-500">
                 <button
-                    class="bg-transparent w-[15%] h-full border-l-2 border-neutral-700/60 text-base text-neutral-400 hover:text-indigo-500 ease-in-out duration-300 flex items-center justify-center">
+                    class="bg-transparent w-[15%] h-full border-l-2 lg:border-neutral-700/60 border-neutral-800/60 text-base text-neutral-400 hover:text-indigo-500 ease-in-out duration-300 flex items-center justify-center">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -57,8 +57,8 @@
         </div>
 
     </div>
-    <button id="btnToggle" class="block md:hidden absolute top-6 right-10 text-neutral-800">
-        <i class="fas fa-bars text-2xl"></i>
+    <button id="btnToggle" class="block md:hidden absolute md:top-6 top-4 right-10 text-neutral-400">
+        <i class="fas fa-bars text-2xl pb-2"></i>
     </button>
 </nav>
 
@@ -90,3 +90,25 @@
         }
     })
 </script>
+
+
+<!-- <script>
+    const navbar = document.getElementById('navbar');
+    // const btnsToggle = document.getElementById('btnToggle');
+
+    // Toggle navbar on mobile
+    // btnsToggle.addEventListener('click', () => {
+    //     navbar.classList.toggle('translate-y-full');
+    // });
+
+    // Toggle fixed navbar on scroll
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 5) {
+            navbar.classList.add('bg-indigo-600', 'text-neutral-900', 'shadow', 'fixed', 'w-full', 'z-50', 'top-0');
+            navbar.classList.remove('bg-neutral-900', 'text-white');
+        } else {
+            navbar.classList.add('bg-neutral-900');
+            navbar.classList.remove('bg-indigo-600', 'text-neutral-900', 'shadow');
+        }
+    });
+</script> -->
