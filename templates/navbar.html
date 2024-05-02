@@ -30,9 +30,18 @@
                     Categories
                 </a>
             </li>
+            {% if request.user.is_authenticated %}
+            <li>
+                <a href="#"
+                    class="text-decoration-none text-base font-medium text-neutral-400 hover:text-red-500 ease-in-out duration-300">
+                    Liked
+                </a>
+            </li>
+            {% endif %}
         </ul>
 
         <div class="flex items-center gap-x-7 gap-y-5 flex-wrap">
+            <!-- Search -->
             <div
                 class="w-[350px] h-10 md:bg-neutral-800 bg-neutral-900 text-base font-medium text-neutral-300 flex items-center border lg:border-neutral-800 border-neutral-900 rounded-md overflow-hidden">
                 <input type="text" placeholder="Search for movies..."
@@ -42,11 +51,21 @@
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-            {% if request.user.is_authenticated %}
+
+            {% if not request.user.is_authenticated %}
+            <!-- Profile image -->
             <a href="{% url 'accounts:profile' %}" class="text-base font-medium text-neutral-400">
-                <!-- Profile image -->
                 <img src="https://source.unsplash.com/random/?women" alt="profile image"
                     class="w-10 h-10 p-0.5 rounded-full object-cover object-center border border-neutral-800/90">
+            </a>
+            <!-- Upload Video -->
+            <!-- <a href="{% url 'accounts:profile' %}"
+                class="w-fit bg-red-700 px-4 py-2 rounded-md text-sm font-medium text-neutral-200 hover:bg-red-600 flex items-center gap-x-2 ease-in-out duration-500">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                Upload
+            </a> -->
+            <a href="{% url 'accounts:upload' %}" class="w-10 h-10 rounded-full flex items-center justify-center bg-red-500/30 font-medium text-neutral-100 p-0.5 border border-neutral-800/90">
+                <i class="fa-solid fa-arrow-up-from-bracket"></i>
             </a>
             {% else %}
             <a href="{% url 'accounts:login' %}"
