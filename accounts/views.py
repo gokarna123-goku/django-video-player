@@ -61,3 +61,12 @@ class UserProfileView(TemplateView):
     def get_object(self, queryset=None):
         return self.request.user
     
+
+class VideoUploadView(TemplateView):
+    template_name = 'uploadvideo/upload.html'
+    model = User
+    context_object_name = 'user'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+    

@@ -4,29 +4,99 @@
 {%block titleblock%}Profile{%endblock%}
 {%block bodyblock%}
 
-<style>
-    .form-text {
-        display: none;
-    }
-</style>
 
-
-
-<div class="w-full h-screen flex-1 flex items-center justify-center mt-10">
-    <div class="w-[30%] h-auto py-10 px-8 rounded-xl border-2 border-neutral-900 shadow-md">
-        <div class="space-y-2 mb-5">
-            <h1 class="text-3xl font-bold text-neutral-100 mb-">Login</h1>
-            <p class="text-sm text-neutral-600 font-normal">
-                Welcome back Goku! Please enter your details.
+<div class="w-full h-auto flex-1 py-3 px-4">
+    <!-- Profile data -->
+    <!--  bg-neutral-900 border border-neutral-900 shadow-md -->
+    <div class="w-1/2 grid grid-cols-3 items-center gap-4 rounded-md p-6 text-neutral-500 font-normal">
+        <img src="{% static 'img/img1.jpg' %}" alt="profile image"
+            class="col-span-1 w-52 h-52 rounded-full border border-neutral-800 p-0.5">
+        <div class="col-span-2 text-base space-y-2">
+            <h1 class="text-lg font-medium flex items-center text-neutral-400 gap-x-2">
+                <i class="fa-solid fa-user text-sm"></i>
+                Gokarna Adhikari
+            </h1>
+            <h6 class=" flex items-center gap-x-2">
+                <i class="fa-solid fa-envelope text-sm"></i>
+                agokarna444@gmail.com
+            </h6>
+            <p class="bio line-clamp-2 text-overflow-hidden flex items-center gap-x-2">
+                <i class="text-sm fa-solid fa-edit"></i>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, delectus.
+            </p>
+            <p class="font-thin flex items-center gap-x-2">
+                <i class="text-sm fa-solid fa-clock"></i>
+                Joined July 2023
             </p>
         </div>
-        <!-- Display user email here if the user is authenticated -->
-        {% if request.user.is_authenticated %}
-        <p class="text-red-600 font-semibold text-xl mt-7 text-center">
-            Email: {{request.user.email}}
-        </p>
-        {% endif %}
     </div>
+
+    <!-- Divider -->
+    <div class="w-full h-[1.5px] bg-neutral-900/50 mt-5 mb-10"></div>
+
+    <!-- <!- Your activity ->
+    <div class="w-full space-y-4">
+        <!- Tab Section ->
+        <div class="w-full flex items-center gap-4">
+            <button
+                class="bg-red-500 text-neutral-950 font-medium text-base flex items-center justify-center px-4 py-2 rounded-md hover:bg-red-600 ease-in-out duration-300">
+                Upload Video
+            </button>
+            <button
+                class=" border-2 border-red-500 text-red-500 font-medium text-base flex items-center justify-center px-4 py-2 rounded-md hover:bg-red-600/40 hover:text-neutral-200 ease-in-out duration-300">
+                Your Videos (3)
+            </button>
+            <button
+                class=" border-2 border-red-500 text-red-500 font-medium text-base flex items-center justify-center px-4 py-2 rounded-md hover:bg-red-600/40 hover:text-neutral-200 ease-in-out duration-300">
+                Your Activities
+            </button>
+        </div>
+
+        <!- Tab Section ->
+        <div class="w-full flex items-center justify-center">
+            hey there
+        </div>
+    </div> -->
+
+
+    <!-- Your videos and activities -->
+    <div class="w-full space-y-10 px-10">
+        <!-- Your videos -->
+        <div class="w-full space-y-3">
+            <h1 class="text-xl font-bold text-neutral-300">
+                Your Videos (03)
+            </h1>
+
+            <!-- Video Table -->
+            {% include 'uploadvideo/videolist.html' %}
+
+            <!-- video card -->
+            <!-- <div class="w-full grid grid-cols-3 gap-4 text-red-500">
+                {% for video in videos %}
+                <div class="w-full h-auto">
+                    <div
+                        class="w-full h-auto rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
+                        <img src="{% static 'img/img1.jpg' %}" alt="video thumbnail"
+                            class="w-full h-full object-cover object-center transition-all ease-in-out duration-300">
+                        <div
+                            class="w-full h-full absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300">
+                            <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                                <button
+                                    class="bg-red-500 text-neutral-950 font-medium text-base flex items-center justify-center px-5 py-2 rounded-md hover:bg-red-600 ease-in-out duration-300">
+                                    <i class="fa-solid fa-play"></i> Play Video
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div> -->
+
+        </div>
+        <!-- your activity -->
+    </div>
+
+
 </div>
 
 
