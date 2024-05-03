@@ -1,0 +1,222 @@
+{% extends '../base.html'%}
+{% load static %}
+
+{%block titleblock%}Detail{%endblock%}
+
+<!-- 
+    - Flowbite CSS 
+-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+
+
+{%block bodyblock%}
+
+
+<div class="w-full h-auto flex-1 mt-5 px-4 py-5">
+    <div class="grid grid-cols-3 gap-y-6">
+        <!-- Video Play section -->
+        <div class="col-span-2 lg:mr-20 mr-0 rounded-md space-y-7">
+            <!-- Video section -->
+            <div class="w-full h-auto rounded-md relative group">
+                <video id="myVideo" autoplay loop class="w-full aspect-video rounded-md">
+                    <source src="{% static 'video/video1.mp4' %}" type="video/mp4">
+                </video>
+                <div
+                    class="controls absolute bottom-0 left-0 w-full h-auto px-7 py-5 bg-gradient-to-t from-neutral-950/70 via-neutral-950/60 to-neutral-950/5 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300">
+                    <div class="flex items-center gap-x-4">
+                        <button onclick="skipBackward()">
+                            <i
+                                class="fa-solid fa-backward text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>
+                        </button>
+                        <button id="playButton" onclick="playPause()">
+                            <i
+                                class="fa-solid fa-play text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>
+                        </button>
+                        <button onclick="skipForward()">
+                            <i
+                                class="fa-solid fa-forward text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>
+                        </button>
+                        <div class="text-neutral-300 text-base font-normal">
+                            <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                        </div>
+                    </div>
+                    <input type="range" id="volume" min="0" max="1" step="0.1" onchange="changeVolume()">
+                </div>
+            </div>
+
+            <!-- Video other tag -->
+            <div class="w-full h-auto flex items-center justify-between px-3 pb-3.5 border-b border-neutral-900/50">
+                <div class="flex items-center bg-neutral-900 rounded-md px-2">
+                    <button class="text-neutral-300 text-xl py-1 px-2 border-r border-neutral-800 flex items-center justify-center gap-x-2">
+                        <i class="fa-regular fa-thumbs-up"></i>
+                        <span class="text-base">
+                            5
+                        </span>
+                    </button>
+                    <button class="text-neutral-300 text-xl py-1 pl-3.5 pr-2 border-l border-neutral-800 flex items-center justify-center">
+                        <i class="fa-regular fa-thumbs-down"></i>
+                    </button>
+                </div>
+                <div>
+                    <button class="text-neutral-300 text-base py-1 px-2 bg-neutral-900 rounded-md  flex items-center justify-center gap-x-2">
+                        <i class="fa-solid fa-share-nodes"></i>
+                        <span class="text-sm">Share</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Display Video comment section -->
+            <div class="w-full h-auto space-y-3 text-neutral-500">
+                Comment section here
+            </div>
+
+        </div>
+
+        <!-- Video detail section -->
+        <div class="col-span-1 rounded-md space-y-6">
+
+            <!-- Channel name -->
+            <div class="w-full h-auto space-y-4 border-b border-neutral-900 pb-4">
+                <h1 class="text-base font-semibold text-neutral-400">
+                    Published by
+                </h1>
+                <div class="flex items-center gap-x-3">
+                    <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                        alt="channel image" class="w-14 h-14 rounded-full">
+
+                    <div>
+                        <h1 class="text-xl text-neutral-300 font-bold">
+                            Channel Name
+                        </h1>
+                        <h1 class="text-sm text-neutral-400">
+                            Joined June 2023
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <!-- Video title -->
+                <h1 class="text-2xl text-neutral-300 font-bold">
+                    The best movie of the year 2024
+                </h1>
+
+                <!-- Video Description -->
+                <p class="text-base text-neutral-500 font-normal line-clamp-4 text-overflow-ellipsis">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque nobis natus quisquam voluptatibus
+                    atque ullam excepturi dolore mollitia voluptates quae. Lorem ipsum dolor sit, amet consectetur
+                    adipisicing elit. Explicabo aspernatur laboriosam voluptas nisi, totam optio dicta id facilis vero
+                    iusto incidunt. Aliquam atque laboriosam accusamus!
+                </p>
+
+
+            </div>
+
+            <!-- Comment section -->
+            <div class="w-full h-auto space-y-4">
+                <h1 class="text-base font-semibold text-neutral-400">
+                    Write a comment
+                </h1>
+                <div class="flex flex-col gap-y-5">
+                    <textarea name="comment" id="video-comment" cols="30" rows="4"
+                        placeholder="e.g. This video provide the best video lists, and other information too..."
+                        class="w-full h-auto bg-neutral-950 outline-none px-4 py-2 placeholder-neutral-700 font-normal rounded-md ring-1 ring-neutral-900 focus:ring-red-500 text-neutral-200"></textarea>
+
+                    <!-- Button -->
+                    <div class="w-full h-auto flex items-center">
+                        <button
+                            class="bg-red-500 text-neutral-950 font-medium text-base flex items-center justify-center px-5 py-2 rounded-md hover:bg-red-600 ease-in-out duration-300">
+                            Post Comment
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Separator -->
+    <hr class="my-14 border-b border-neutral-900">
+
+    <!-- Related section -->
+    {% include 'videos/related/related.html' %}
+
+
+</div>
+
+
+{%block scriptblock%}
+<!-- 
+    - Flowbite Js Link 
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+
+<!-- For video controls -->
+
+<script>
+    const video = document.getElementById('myVideo');
+    const playButton = document.getElementById('playButton');
+    const skipBackwardButton = document.getElementById('skipBackwardButton');
+    const skipForwardButton = document.getElementById('skipForwardButton');
+    const volumeSlider = document.getElementById('volume');
+    const currentTimeSpan = document.getElementById('currentTime');
+    const durationSpan = document.getElementById('duration');
+
+    video.addEventListener('loadedmetadata', function () {
+        durationSpan.textContent = formatTime(video.duration);
+    });
+
+
+    function playPause() {
+        if (video.paused) {
+            video.play();
+            playButton.classList.remove('play-icon');
+            playButton.classList.add('pause-icon');
+            playButton.innerHTML = '<i class="fas fa-pause  text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>';
+        } else {
+            video.pause();
+            playButton.classList.remove('pause-icon');
+            playButton.classList.add('play-icon');
+            playButton.innerHTML = '<i class="fas fa-play  text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>';
+        }
+    }
+
+    // function playPause() {
+    //     if (video.paused) {
+    //         video.play();
+    //         playButton.innerHTML = '&#10074;&#10074;';
+    //     } else {
+    //         video.pause();
+    //         playButton.innerHTML = '&#9658;';
+    //     }
+    // }
+
+    function skipBackward() {
+        video.currentTime -= 10;
+    }
+
+    function skipForward() {
+        video.currentTime += 10;
+    }
+
+    function changeVolume() {
+        video.volume = volumeSlider.value;
+    }
+
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    }
+
+    video.addEventListener('timeupdate', function () {
+        currentTimeSpan.textContent = formatTime(video.currentTime);
+    });
+</script>
+
+
+{%endblock%}
+
+{%endblock%}

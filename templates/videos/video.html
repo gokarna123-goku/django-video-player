@@ -1,17 +1,35 @@
 {% extends '../base.html'%}
 {% load static %}
 
-{%block titleblock%}Home{%endblock%}
+{%block titleblock%}Videos{%endblock%}
+
+<!-- 
+    - Flowbite CSS 
+-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+
+
 {%block bodyblock%}
 
 
-<div class="w-full min-h-screen flex-1">
-    <p class="text-base text-neutral-300 font-normal py-3 px-4">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, eveniet molestias saepe neque nostrum in iusto
-        sint distinctio laudantium. Modi alias accusantium quisquam ducimus inventore fugit repellat error ad unde,
-        doloribus, beatae consequuntur minus cupiditate!
-    </p>
+<div class="w-full h-auto flex-1 px-4 py-5">
+    <div class="w-full space-y-8">
+        <!-- Filter section -->
+        {% include 'videos/filter.html' %}
+
+        <!-- Video Card section -->
+        {% include 'videos/videocard.html' %}
+    </div>
+
 </div>
 
+
+{%block scriptblock%}
+<!-- 
+    - Flowbite Js Link 
+-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+{%endblock%}
 
 {%endblock%}
