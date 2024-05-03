@@ -30,7 +30,7 @@
                     Categories
                 </a>
             </li>
-            {% if request.user.is_authenticated %}
+            {% if not request.user.is_authenticated %}
             <li>
                 <a href="#"
                     class="text-decoration-none text-base font-medium text-neutral-400 hover:text-red-500 ease-in-out duration-300">

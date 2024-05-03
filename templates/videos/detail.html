@@ -30,7 +30,7 @@
                         </button>
                         <button id="playButton" onclick="playPause()">
                             <i
-                                class="fa-solid fa-play text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>
+                                class="fa-solid fa-pause text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>
                         </button>
                         <button onclick="skipForward()">
                             <i
@@ -40,25 +40,28 @@
                             <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
                         </div>
                     </div>
-                    <input type="range" id="volume" min="0" max="1" step="0.1" onchange="changeVolume()">
+                    <input type="range" id="volume" min="0" max="1" step="0.1" class="w-auto h-[4px] bg-red-500 rounded-lg appearance-none cursor-pointer" onchange="changeVolume()">
                 </div>
             </div>
 
             <!-- Video other tag -->
             <div class="w-full h-auto flex items-center justify-between px-3 pb-3.5 border-b border-neutral-900/50">
                 <div class="flex items-center bg-neutral-900 rounded-md px-2">
-                    <button class="text-neutral-300 text-xl py-1 px-2 border-r border-neutral-800 flex items-center justify-center gap-x-2">
+                    <button
+                        class="text-neutral-300 text-xl py-1 px-2 border-r border-neutral-800 flex items-center justify-center gap-x-2">
                         <i class="fa-regular fa-thumbs-up"></i>
                         <span class="text-base">
                             5
                         </span>
                     </button>
-                    <button class="text-neutral-300 text-xl py-1 pl-3.5 pr-2 border-l border-neutral-800 flex items-center justify-center">
+                    <button
+                        class="text-neutral-300 text-xl py-1 pl-3.5 pr-2 border-l border-neutral-800 flex items-center justify-center">
                         <i class="fa-regular fa-thumbs-down"></i>
                     </button>
                 </div>
                 <div>
-                    <button class="text-neutral-300 text-base py-1 px-2 bg-neutral-900 rounded-md  flex items-center justify-center gap-x-2">
+                    <button
+                        class="text-neutral-300 text-base py-1 px-2 bg-neutral-900 rounded-md  flex items-center justify-center gap-x-2">
                         <i class="fa-solid fa-share-nodes"></i>
                         <span class="text-sm">Share</span>
                     </button>
@@ -67,7 +70,26 @@
 
             <!-- Display Video comment section -->
             <div class="w-full h-auto space-y-3 text-neutral-500">
-                Comment section here
+                <div class="w-full flex items-start gap-x-2">
+                    <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+                        alt="profile image" class="w-12 h-12 p-0.5 rounded-full object-cover object-center">
+                    <div class="space-y-2">
+                        <div class="space-y-0.5">
+                            <h1 class="text-base font-semibold text-neutral-300">
+                                @gokarnaadhikari153
+                            </h1>
+                            <p class="text-sm font-normal text-neutral-600">
+                                3 days ago
+                            </p>
+                        </div>
+                        <p class="text-sm font-normal">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque nobis natus quisquam
+                            voluptatibus
+                            atque ullam excepturi dolore mollitia voluptates quae. Lorem ipsum dolor sit, amet
+                            consectetur
+                        </p>
+                    </div>
+                </div>
             </div>
 
         </div>
