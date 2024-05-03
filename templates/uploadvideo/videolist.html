@@ -41,16 +41,10 @@
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <div class="p-4 bg-neutral-950 border-t-2 border-l-2 border-r-2 rounded-t-md border-neutral-900">
         <label for="table-search" class="sr-only">Search</label>
-        <div class="relative mt-1">
-            <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg class="w-4 h-4 text-neutral-500 dark:text-neutral-400" aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                </svg>
-            </div>
-            <input type="text" id="table-search"
-                class="block pt-2 ps-10 text-sm text-neutral-900 border border-neutral-300 rounded-lg w-80 bg-neutral-50 focus:ring-red-500 focus:border-red-500 dark:bg-neutral-700 dark:border-neutral-600 dark:placeholder-neutral-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500"
+        <div
+            class="max-w-md h-11 px-4 flex items-center gap-x-3 rounded-md bg-neutral-900 border border-neutral-900 text-sm font-normal text-neutral-300 placeholder-neutral-600 overflow-hidden">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" id="table-search" class="w-full h-full bg-transparent outline-none"
                 placeholder="Search for items">
         </div>
     </div>
@@ -65,16 +59,16 @@
                     </div>
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Product name
+                    Video Title
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Color
+                    Upload Date
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Category
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Price
+                    Size
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Action
@@ -91,19 +85,18 @@
                     </div>
                 </td>
                 <th scope="row" class="px-6 py-4 font-medium text-neutral-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
+                    The Sliding Mr. Bones (Next Stop, Pottersville)
                 </th>
                 <td class="px-6 py-4">
-                    Silver
+                    03-02-2024
                 </td>
                 <td class="px-6 py-4">
-                    Laptop
+                    Funny
                 </td>
                 <td class="px-6 py-4">
-                    $2999
+                    256 MB
                 </td>
                 <td class="px-6 py-4 flex items-center gap-x-7">
-                    <!-- <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Edit</a> -->
                     <a href="#" class="text-red-500 text-xl">
                         <i class="fa-solid fa-edit"></i>
                     </a>
