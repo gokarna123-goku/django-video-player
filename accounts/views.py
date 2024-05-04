@@ -5,6 +5,8 @@ from django.views.generic import FormView, TemplateView, CreateView
 from django.contrib.auth import authenticate, login
 from .forms import RegisterForm, LoginForm
 from .models import User
+from django.contrib.auth.views import LoginView, LogoutView
+# from django.contrib.auth.views import LogoutView
 
 
 class RegisterView(FormView):
@@ -24,34 +26,44 @@ class RegisterView(FormView):
     def get_success_url(self):
         return reverse_lazy('accounts:login')
 
-# Logout View
-# class DLogoutView(LogoutView):
-#     next_page='accounts:login'
-
-#     def dispatch(self, request, *args, **kwargs):
-#         response = super().dispatch(request, *args, **kwargs)
-#         messages.add_message(request, messages.SUCCESS, "You have logged out. Login again.")
-#         return response
 
 
-class LoginView(FormView):
+class LoginView(LoginView):
     template_name = 'accounts/login.html'
     form_class = LoginForm
-    success_url = reverse_lazy('accounts:profile')
 
     def form_valid(self, form):
-        email = form.cleaned_data.get('username')
+        email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
-        user = authenticate(self.request, username=email, password=password)
+        user = authenticate(self.request, email=email, password=password)
         print(user)
         if user is not None:
             login(self.request, user)
-            messages.success(self.request, 'Successfully Logged In!')
+            messages.success(self.request, 'Successfully Created Your Account!')
             return super().form_valid(form)
         else:
             messages.error(self.request, 'Invalid email or password')
             return self.form_invalid(form)
+        
+    def get_success_url(self):
+        return reverse_lazy('accounts:profile')
     
+
+
+# Logout View
+class UserLogoutView(LogoutView):
+    # http_method_names = ['post', 'get']
+    next_page='home:home'
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        messages.add_message(request, messages.SUCCESS, "You have logged out successfully, thank you for using our service.")
+        return response
+    
+    def get_success_url(self):
+        return reverse_lazy('accounts:login')
+
+
 
 class UserProfileView(TemplateView):
     template_name = 'accounts/profile.html'

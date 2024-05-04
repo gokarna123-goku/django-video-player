@@ -8,26 +8,34 @@
 <div class="w-full h-auto flex-1 py-3 px-4">
     <!-- Profile data -->
     <!--  bg-neutral-900 border border-neutral-900 shadow-md -->
-    <div class="w-1/2 grid grid-cols-3 items-center gap-4 rounded-md p-6 text-neutral-500 font-normal">
-        <img src="{% static 'img/img1.jpg' %}" alt="profile image"
-            class="col-span-1 w-52 h-52 rounded-full border border-neutral-800 p-0.5">
-        <div class="col-span-2 text-base space-y-2">
-            <h1 class="text-lg font-medium flex items-center text-neutral-400 gap-x-2">
-                <i class="fa-solid fa-user text-sm"></i>
-                Gokarna Adhikari
-            </h1>
-            <h6 class=" flex items-center gap-x-2">
-                <i class="fa-solid fa-envelope text-sm"></i>
-                agokarna444@gmail.com
-            </h6>
-            <p class="bio line-clamp-2 text-overflow-hidden flex items-center gap-x-2">
-                <i class="text-sm fa-solid fa-edit"></i>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, delectus.
-            </p>
-            <p class="font-thin flex items-center gap-x-2">
-                <i class="text-sm fa-solid fa-clock"></i>
-                Joined July 2023
-            </p>
+    <div class="w-full h-auto grid grid-cols-3 gap-4">
+        <div class="col-span-2 grid grid-cols-4 items-center gap-4 rounded-md p-6 text-neutral-500 font-normal">
+            <img src="{% static 'img/img1.jpg' %}" alt="profile image"
+                class="col-span-1 w-52 h-52 rounded-full border border-neutral-800 p-0.5">
+            <div class="col-span-3 text-base space-y-2">
+                <h1 class="text-lg font-medium flex items-center text-neutral-400 gap-x-2">
+                    <i class="fa-solid fa-user text-sm"></i>
+                    Gokarna Adhikari
+                </h1>
+                <h6 class=" flex items-center gap-x-2">
+                    <i class="fa-solid fa-envelope text-sm"></i>
+                    agokarna444@gmail.com
+                </h6>
+                <p class="bio line-clamp-2 text-overflow-hidden flex items-center gap-x-2">
+                    <i class="text-sm fa-solid fa-edit"></i>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, delectus.
+                </p>
+                <p class="font-thin flex items-center gap-x-2">
+                    <i class="text-sm fa-solid fa-clock"></i>
+                    Joined July 2023
+                </p>
+            </div>
+        </div>
+        <div class="col-span-1 p-6 flex items-center justify-end text-neutral-400 text-base font-medium">
+            <a href="{% url 'accounts:logout'%}"
+                class="px-4 py-2 rounded-md bg-red-500 text-base text-neutral-300 font-medium flex items-center justify-center">
+                Logout
+            </a>
         </div>
     </div>
 
@@ -77,10 +85,10 @@
             <h1 class="text-xl font-bold text-neutral-300">
                 Your Activities
             </h1>
-        
+
             <!-- Activities -->
             {% include 'uploadvideo/activity.html' %}
-        
+
         </div>
     </div>
 
