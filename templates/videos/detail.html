@@ -1,7 +1,7 @@
 {% extends '../base.html'%}
 {% load static %}
 
-{%block titleblock%}Detail{%endblock%}
+{%block titleblock%}{{object.title}}{%endblock%}
 
 <!-- 
     - Flowbite CSS 
@@ -19,12 +19,12 @@
             <!-- Video section -->
             <div class="w-full h-auto rounded-md relative group">
                 <video id="myVideo" autoplay loop class="w-full aspect-video rounded-md">
-                    <source src="{% static 'video/video1.mp4' %}" type="video/mp4">
+                    <source src="{{object.video_file.url}}" type="video/mp4">
                 </video>
                 <div
                     class="controls absolute bottom-0 left-0 w-full h-auto px-7 py-5 bg-gradient-to-t from-neutral-950/70 via-neutral-950/60 to-neutral-950/5 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-300">
                     <div class="flex items-center gap-x-4">
-                        <button onclick="skipBackward()">
+                        <button id="skipBackwardButton" onclick="skipBackward()">
                             <i
                                 class="fa-solid fa-backward text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>
                         </button>
@@ -32,7 +32,7 @@
                             <i
                                 class="fa-solid fa-pause text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>
                         </button>
-                        <button onclick="skipForward()">
+                        <button id="skipForwardButton" onclick="skipForward()">
                             <i
                                 class="fa-solid fa-forward text-neutral-50 text-2xl hover:scale-125 ease-in-out duration-300"></i>
                         </button>
@@ -40,18 +40,20 @@
                             <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
                         </div>
                     </div>
-                    <input type="range" id="volume" min="0" max="1" step="0.1" class="w-auto h-[4px] bg-red-500 rounded-lg appearance-none cursor-pointer" onchange="changeVolume()">
+                    <input type="range" id="volume" min="0" max="1" step="0.1"
+                        class="w-auto h-[4px] bg-red-500 rounded-lg appearance-none cursor-pointer"
+                        onchange="changeVolume()">
                 </div>
             </div>
 
-            <!-- Video other tag -->
+            <!-- Video actions -->
             <div class="w-full h-auto flex items-center justify-between px-3 pb-3.5 border-b border-neutral-900/50">
                 <div class="flex items-center bg-neutral-900 rounded-md px-2">
                     <button
                         class="text-neutral-300 text-xl py-1 px-2 border-r border-neutral-800 flex items-center justify-center gap-x-2">
                         <i class="fa-regular fa-thumbs-up"></i>
                         <span class="text-base">
-                            5
+                            {{object.likes.count}}
                         </span>
                     </button>
                     <button
@@ -63,33 +65,36 @@
                     <button
                         class="text-neutral-300 text-base py-1 px-2 bg-neutral-900 rounded-md  flex items-center justify-center gap-x-2">
                         <i class="fa-solid fa-share-nodes"></i>
-                        <span class="text-sm">Share</span>
+                        <span class="text-sm">{{object.shares.count}}</span>
                     </button>
                 </div>
             </div>
 
             <!-- Display Video comment section -->
             <div class="w-full h-auto space-y-3 text-neutral-500">
+                {% if object.comment %}
                 <div class="w-full flex items-start gap-x-2">
                     <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
                         alt="profile image" class="w-12 h-12 p-0.5 rounded-full object-cover object-center">
                     <div class="space-y-2">
                         <div class="space-y-0.5">
                             <h1 class="text-base font-semibold text-neutral-300">
-                                @gokarnaadhikari153
+                                {{object.publisher}}
                             </h1>
                             <p class="text-sm font-normal text-neutral-600">
                                 3 days ago
                             </p>
                         </div>
                         <p class="text-sm font-normal">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque nobis natus quisquam
-                            voluptatibus
-                            atque ullam excepturi dolore mollitia voluptates quae. Lorem ipsum dolor sit, amet
-                            consectetur
+                            {{ object.comment }}
                         </p>
                     </div>
                 </div>
+                {% else %}
+                <p class="text-neutral-500 font-medium text-base">
+                    No comments yet!
+                </p>
+                {% endif %}
             </div>
 
         </div>
@@ -120,17 +125,13 @@
             <div class="space-y-3">
                 <!-- Video title -->
                 <h1 class="text-2xl text-neutral-300 font-bold">
-                    The best movie of the year 2024
+                    {{object.title}}
                 </h1>
 
                 <!-- Video Description -->
                 <p class="text-base text-neutral-500 font-normal line-clamp-4 text-overflow-ellipsis">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque nobis natus quisquam voluptatibus
-                    atque ullam excepturi dolore mollitia voluptates quae. Lorem ipsum dolor sit, amet consectetur
-                    adipisicing elit. Explicabo aspernatur laboriosam voluptas nisi, totam optio dicta id facilis vero
-                    iusto incidunt. Aliquam atque laboriosam accusamus!
+                    {{object.description}}
                 </p>
-
 
             </div>
 
@@ -182,6 +183,8 @@
     const playButton = document.getElementById('playButton');
     const skipBackwardButton = document.getElementById('skipBackwardButton');
     const skipForwardButton = document.getElementById('skipForwardButton');
+    // const skipBackwardButton = document.querySelector('button:nth-child(1)'); // Select the first button for skip backward
+    // const skipForwardButton = document.querySelector('button:nth-child(3'); // Select the third button for skip forward
     const volumeSlider = document.getElementById('volume');
     const currentTimeSpan = document.getElementById('currentTime');
     const durationSpan = document.getElementById('duration');
@@ -205,22 +208,13 @@
         }
     }
 
-    // function playPause() {
-    //     if (video.paused) {
-    //         video.play();
-    //         playButton.innerHTML = '&#10074;&#10074;';
-    //     } else {
-    //         video.pause();
-    //         playButton.innerHTML = '&#9658;';
-    //     }
-    // }
-
+    // Skips the video backward by 10 seconds.
     function skipBackward() {
-        video.currentTime -= 10;
+        video.currentTime = Math.max(0, video.currentTime - 5);
     }
 
     function skipForward() {
-        video.currentTime += 10;
+       video.currentTime = Math.max(0, video.currentTime + 5);
     }
 
     function changeVolume() {

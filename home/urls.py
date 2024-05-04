@@ -5,5 +5,5 @@ app_name = 'home'
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('video/', VideoListView.as_view(), name='video'),
-    path('video/detail/', VideoDetailView.as_view(), name='detail'),
+    path('video/detail/<int:pk>', VideoDetailView.as_view(), name='detail'),
 ]
