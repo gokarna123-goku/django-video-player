@@ -12,6 +12,7 @@ from django.core.files.storage import FileSystemStorage
 # Create your views here.
 
 
+
 class HomeView(TemplateView):
     template_name = "home/index.html"
 
