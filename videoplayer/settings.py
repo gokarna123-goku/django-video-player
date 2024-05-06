@@ -108,6 +108,10 @@ DATABASES = {
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
 
+AUTH_USER_MODEL = 'accounts.CustomUser'
+LOGIN_REDIRECT_URL = 'accounts:profile'
+LOGIN_URL = 'accounts:login'
+LOGOUT_URL = 'accounts:login'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

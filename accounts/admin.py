@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import User
+from .models import CustomUser
 
 # Register your models here.
 
 class UserAdmin(admin.ModelAdmin):
-    modal = User
+    modal = CustomUser
     fields = ('email', 'password', 'is_active', 'is_staff')
     list_display = ('email','created_at', 'is_staff', 'is_superuser', 'is_active')
     list_filter = ('email', 'is_active', 'is_staff')
@@ -21,4 +21,4 @@ class UserAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(User)
+admin.site.register(CustomUser)

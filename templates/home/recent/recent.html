@@ -11,96 +11,25 @@
         </a>
     </div>
     <!-- Swiper -->
+    <!-- {% if recent_videos %} -->
     <div class="swiper mySwiper w-full h-full">
         <div class="swiper-wrapper">
+            {% for i in recent_videos %}
             <a href="#" class="swiper-slide flex align-items justify-center">
                 <!-- Video Thumbnail -->
-                <div class="w-full h-[16ch] rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
-                    <img src="{% static 'img/img1.jpg' %}" alt="video thumbnail"
+                <div
+                    class="w-full h-[16ch] rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
+                    <img src="{{i.video_thumbnail.url}}" alt="video thumbnail"
                         class="w-full h-full object-cover object-center transition-all ease-in-out duration-300">
                     <div
                         class="absolute top-0 left-0 w-full h-full text-center bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/5 opacity-0 group-hover:opacity-100 text-base text-neutral-50 font-semibold px-3 py-2 flex items-end transition-all ease-in-out duration-300">
-                        Spider-Man No Way Home
+                        {{i.title}}
                     </div>
                 </div>
             </a>
-            <a href="#" class="swiper-slide flex align-items justify-center">
-                <!-- Video Thumbnail -->
-                <div class="w-full h-[16ch] rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
-                    <img src="{% static 'img/img2.jpg' %}" alt="video thumbnail"
-                        class="w-full h-full object-cover object-center transition-all ease-in-out duration-300">
-                    <div
-                        class="absolute top-0 left-0 w-full h-full text-center bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/5 opacity-0 group-hover:opacity-100 text-base text-neutral-50 font-semibold px-3 py-2 flex items-end transition-all ease-in-out duration-300">
-                        Spider-Man No Way Home
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="swiper-slide flex align-items justify-center">
-                <!-- Video Thumbnail -->
-                <div class="w-full h-[16ch] rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
-                    <img src="{% static 'img/img3.jpg' %}" alt="video thumbnail"
-                        class="w-full h-full object-cover object-center transition-all ease-in-out duration-300">
-                    <div
-                        class="absolute top-0 left-0 w-full h-full text-center bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/5 opacity-0 group-hover:opacity-100 text-base text-neutral-50 font-semibold px-3 py-2 flex items-end transition-all ease-in-out duration-300">
-                        Spider-Man No Way Home
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="swiper-slide flex align-items justify-center">
-                <!-- Video Thumbnail -->
-                <div class="w-full h-[16ch] rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
-                    <img src="{% static 'img/img4.jpg' %}" alt="video thumbnail"
-                        class="w-full h-full object-cover object-center transition-all ease-in-out duration-300">
-                    <div
-                        class="absolute top-0 left-0 w-full h-full text-center bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/5 opacity-0 group-hover:opacity-100 text-base text-neutral-50 font-semibold px-3 py-2 flex items-end transition-all ease-in-out duration-300">
-                        Spider-Man No Way Home
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="swiper-slide flex align-items justify-center">
-                <!-- Video Thumbnail -->
-                <div class="w-full h-[16ch] rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
-                    <img src="{% static 'img/img5.jpg' %}" alt="video thumbnail"
-                        class="w-full h-full object-cover object-center transition-all ease-in-out duration-300">
-                    <div
-                        class="absolute top-0 left-0 w-full h-full text-center bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/5 opacity-0 group-hover:opacity-100 text-base text-neutral-50 font-semibold px-3 py-2 flex items-end transition-all ease-in-out duration-300">
-                        Spider-Man No Way Home
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="swiper-slide flex align-items justify-center">
-                <!-- Video Thumbnail -->
-                <div class="w-full h-[16ch] rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
-                    <img src="{% static 'img/img2.jpg' %}" alt="video thumbnail"
-                        class="w-full h-full object-cover object-center transition-all ease-in-out duration-300">
-                    <div
-                        class="absolute top-0 left-0 w-full h-full text-center bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/5 opacity-0 group-hover:opacity-100 text-base text-neutral-50 font-semibold px-3 py-2 flex items-end transition-all ease-in-out duration-300">
-                        Spider-Man No Way Home
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="swiper-slide flex align-items justify-center">
-                <!-- Video Thumbnail -->
-                <div class="w-full h-[16ch] rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
-                    <img src="{% static 'img/img3.jpg' %}" alt="video thumbnail"
-                        class="w-full h-full object-cover object-center transition-all ease-in-out duration-300">
-                    <div
-                        class="absolute top-0 left-0 w-full h-full text-center bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/5 opacity-0 group-hover:opacity-100 text-base text-neutral-50 font-semibold px-3 py-2 flex items-end transition-all ease-in-out duration-300">
-                        Spider-Man No Way Home
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="swiper-slide flex align-items justify-center">
-                <!-- Video Thumbnail -->
-                <div class="w-full h-[16ch] rounded-md overflow-hidden relative group transition-all ease-in-out duration-300">
-                    <img src="{% static 'img/img4.jpg' %}" alt="video thumbnail"
-                        class="w-full h-full object-cover object-center transition-all ease-in-out duration-300">
-                    <div
-                        class="absolute top-0 left-0 w-full h-full text-center bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/5 opacity-0 group-hover:opacity-100 text-base text-neutral-50 font-semibold px-3 py-2 flex items-end transition-all ease-in-out duration-300">
-                        Spider-Man No Way Home
-                    </div>
-                </div>
-            </a>
+            {% empty %}
+            <p class="text-neutral-500 text-base">No Videos Found</p>
+            {% endfor %}
         </div>
 
         <!-- Swiper Navigation -->
@@ -111,4 +40,7 @@
             <i class="fa-solid fa-chevron-left"></i>
         </div>
     </div>
+    <!-- {% else %}
+    <p class="text-neutral-500 text-base">No Recent Videos Found</p>
+    {% endif %} -->
 </div>

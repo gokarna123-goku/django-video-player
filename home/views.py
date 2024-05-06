@@ -1,17 +1,16 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from pyexpat.errors import messages
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, TemplateView
-from django.views.generic.edit import CreateView
-from django.urls import reverse_lazy
 from random import choice
+from django.contrib.auth.decorators import login_required
 
-from .forms import VideoUploadForm
-from .models import Video, Comment
-from django.core.files.storage import FileSystemStorage
+from .models import Video
+
+from .forms import CommentForm
+
 
 # Create your views here.
-
-
 
 class HomeView(TemplateView):
     template_name = "home/index.html"
@@ -19,28 +18,6 @@ class HomeView(TemplateView):
     def get_object(self):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Video, pk=pk)
-
-        # """
-        # Retrieves the context data for the current view.
-
-        # Args:
-        #     **kwargs: Additional keyword arguments.
-
-        # Returns:
-        #     dict: The context data containing the following keys:
-        #         - 'video_src' (str): The URL of the randomly selected video file.
-        #         - 'title' (str): The title of the selected video.
-        #         - 'description' (str): The description of the selected video.
-
-        # This method retrieves all the video objects from the Video model and selects a random video. It then sets the
-        # 'video_src', 'title', and 'description' keys in the context dictionary with the corresponding values from the
-        # selected video object. The 'video_id' key is commented out and not set in the context.
-
-        # Note: The 'video_src' key is currently commented out and not set in the context.
-
-        # Note: The 'pk' value from the kwargs is not used in this method.
-
-        # Note: The 'videos' queryset is not used in this method and is replaced with a call to Video.objects.all().
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -56,8 +33,20 @@ class HomeView(TemplateView):
         context['title'] = selected_video.title
         context['description'] = selected_video.description
         return context
-    
 
+    # def get_recent_videos(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     recent_videos = Video.objects.all().order_by('uploaded_at')
+    #     context['recent_videos'] = recent_videos  # Update the key to 'recent_videos'
+    #     return context
+
+
+    def get_recent_videos(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        recent_videos = Video.objects.all()
+        context['recent_videos'] = recent_videos
+        return context
+    
 
 class VideoListView(ListView):
     model = Video
@@ -81,7 +70,25 @@ class VideoDetailView(DetailView):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Video, pk=pk)
 
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['video-active'] = 'active'
+        context['form'] = CommentForm()
+        # context['title'] = Video.objects.filter(user=self.request.user, title=context['title']).first()
         return context
+    
+    def post(self, request, *args, **kwargs):
+        video = self.get_object()
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.video = video
+            comment.user = request.user
+            comment.save()
+            # messages.success(request, 'Comment posted.')
+            return HttpResponseRedirect(self.request.path_info +'#comments')
+        else:
+            messages.error(request, 'Something went wrong.')
+            return HttpResponseRedirect(self.request.path_info +'#comments')
+
+    

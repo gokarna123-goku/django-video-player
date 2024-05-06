@@ -1,6 +1,6 @@
 from django.db import models
 
-from django.contrib.auth.models import User
+from accounts.models import CustomUser
 
 # Create your models here.
 class Video(models.Model):
@@ -8,21 +8,27 @@ class Video(models.Model):
     video_file = models.FileField(upload_to='videos/')
     video_thumbnail = models.ImageField(upload_to='thumbnails/')
     description = models.TextField()
-    publisher = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.PositiveIntegerField(default=0)
-    dislikes = models.PositiveIntegerField(default=0)
-    shares = models.PositiveIntegerField(default=0)
+    publisher = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+    
+    @property
+    def comments(self):
+        return VideoComment.objects.filter(video=self)
 
 
-class Comment(models.Model):
-    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+
+class VideoComment(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+
+    class Meta:
+        ordering = ('-created_at',)
 
     def __str__(self):
-        return f"Comment by {self.user.username} on {self.video.title}"
+        return f"Comment by {self.user.email} on {self.video.title}"
+    

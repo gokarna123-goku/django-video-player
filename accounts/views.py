@@ -4,9 +4,10 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView, CreateView
 from django.contrib.auth import authenticate, login
 from .forms import RegisterForm, LoginForm
-from .models import User
+from .models import CustomUser
 from django.contrib.auth.views import LoginView, LogoutView
 # from django.contrib.auth.views import LogoutView
+from django.contrib.auth import login as auth_login
 
 
 class RegisterView(FormView):
@@ -28,38 +29,50 @@ class RegisterView(FormView):
 
 
 
-class LoginView(LoginView):
+
+
+class UserLoginView(LoginView):
     template_name = 'accounts/login.html'
-    form_class = LoginForm
+    success_message = "You were successfully logged in."
+    success_url = 'acounts:profile'
+
 
     def form_valid(self, form):
-        email = form.cleaned_data.get('email')
-        password = form.cleaned_data.get('password')
-        user = authenticate(self.request, email=email, password=password)
-        print(user)
-        if user is not None:
-            login(self.request, user)
-            messages.success(self.request, 'Successfully Created Your Account!')
-            return super().form_valid(form)
+        user = form.get_user()
+        if user.is_superuser :
+            auth_login(self.request, form.get_user())
+            messages.success(self.request,'Logged in as a Superuser.')
+            return redirect('/admin/')
+        # elif  not user.is_verified :
+        #     # messages.error(self.request, "Verify Your Email First.")
+        #     messages.info(self.request, "You are still under verification.")
+        elif user.is_active :
+            auth_login(self.request, form.get_user())
+            messages.success(self.request,'Logged in successfully.')
+            return redirect('accounts:profile')
         else:
-            messages.error(self.request, 'Invalid email or password')
-            return self.form_invalid(form)
-        
-    def get_success_url(self):
-        return reverse_lazy('accounts:profile')
+            messages.error(self.request, "Something went terribly wrong.")
+
+        # return HttpResponseRedirect(self.get_success_url())
+        return self.render_to_response(self.get_context_data(form=form))
+
+    def form_invalid(self, form):
+        messages.error(self.request, 'Invalid Username or Password')
+        return self.render_to_response(self.get_context_data(form=form))
+
+
     
 
 
 # Logout View
 class UserLogoutView(LogoutView):
-    # http_method_names = ['post', 'get']
-    next_page='home:home'
+    next_page='accounts:login'
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        messages.add_message(request, messages.SUCCESS, "You have logged out successfully, thank you for using our service.")
+        messages.add_message(request, messages.SUCCESS, "You have logged out. Login again.")
         return response
-    
+
     def get_success_url(self):
         return reverse_lazy('accounts:login')
 
@@ -67,7 +80,7 @@ class UserLogoutView(LogoutView):
 
 class UserProfileView(TemplateView):
     template_name = 'accounts/profile.html'
-    model = User
+    model = CustomUser
     context_object_name = 'user'
 
     def get_object(self, queryset=None):
@@ -76,7 +89,7 @@ class UserProfileView(TemplateView):
 
 class VideoUploadView(TemplateView):
     template_name = 'uploadvideo/upload.html'
-    model = User
+    model = CustomUser
     context_object_name = 'user'
 
     def get_object(self, queryset=None):
