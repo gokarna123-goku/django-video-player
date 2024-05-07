@@ -53,7 +53,7 @@
                         class="text-neutral-300 text-xl py-1 px-2 border-r border-neutral-800 flex items-center justify-center gap-x-2">
                         <i class="fa-regular fa-thumbs-up"></i>
                         <span class="text-base">
-                            {{object.likes.count}}
+                            0
                         </span>
                     </button>
                     <button
@@ -75,12 +75,12 @@
                 {% if object.comments %}
                 {% for i in object.comments %}
                 <div class="w-full flex items-start gap-x-2">
-                    <img src="{{i.user.profile_picture.image.url}}" alt="profile image"
-                        class="w-12 h-12 p-0.5 rounded-full object-cover object-center">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        alt="profile image" class="w-12 h-12 p-0.5 rounded-full object-cover object-center">
                     <div class="space-y-2">
                         <div class="space-y-0.5">
                             <h1 class="text-base font-semibold text-neutral-300">
-                                {{i.user.email}}
+                                {{i.user.get_full_name}}
                             </h1>
                             <p class="text-sm font-normal text-neutral-600">
                                 {{i.created_at|timesince}}
@@ -130,6 +130,18 @@
                     {{object.title}}
                 </h1>
 
+                <div class="space-y-1 text-base text-neutral-500 font-normal">
+                    <h6 class="">
+                        Produced by: <span class="text-neutral-400 font-medium">{{object.producer}}</span>
+                    </h6>
+                    <h6 class="">
+                        Genre: <span class="text-neutral-400 font-medium">{{object.genre}}</span>
+                    </h6>
+                    <div class="bg-neutral-900 text-sm text-red-500 rounded-md w-fit px-2 py-1">
+                        {{object.age_rating}} Rated
+                    </div>
+                </div>
+
                 <!-- Video Description -->
                 <p class="text-base text-neutral-500 font-normal line-clamp-4 text-overflow-ellipsis">
                     {{object.description}}
@@ -155,7 +167,8 @@
                                 Post Comment
                             </button>
                             {% else %}
-                            <a href="{% url 'accounts:login' %}" class="bg-red-500 text-neutral-950 font-medium text-base flex items-center justify-center px-5 py-2 rounded-md hover:bg-red-600 ease-in-out duration-300">
+                            <a href="{% url 'accounts:login' %}"
+                                class="bg-red-500 text-neutral-950 font-medium text-base flex items-center justify-center px-5 py-2 rounded-md hover:bg-red-600 ease-in-out duration-300">
                                 Log in to post comment
                             </a>
                             {% endif %}
