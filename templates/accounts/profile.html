@@ -10,24 +10,24 @@
     <!--  bg-neutral-900 border border-neutral-900 shadow-md -->
     <div class="w-full h-auto grid grid-cols-3 gap-4">
         <div class="col-span-2 grid grid-cols-4 items-center gap-4 rounded-md p-6 text-neutral-500 font-normal">
-            <img src="{% static 'img/img1.jpg' %}" alt="profile image"
+            <img src="{{request.user.get_profile_pic}}" alt="profile image"
                 class="col-span-1 w-52 h-52 rounded-full border border-neutral-800 p-0.5">
             <div class="col-span-3 text-base space-y-2">
                 <h1 class="text-lg font-medium flex items-center text-neutral-400 gap-x-2">
                     <i class="fa-solid fa-user text-sm"></i>
-                    Gokarna Adhikari
+                    {{request.user.get_full_name}}
                 </h1>
                 <h6 class=" flex items-center gap-x-2">
                     <i class="fa-solid fa-envelope text-sm"></i>
-                    agokarna444@gmail.com
+                    {{request.user.email}}
                 </h6>
-                <p class="bio line-clamp-2 text-overflow-hidden flex items-center gap-x-2">
+                <!-- <p class="bio line-clamp-2 text-overflow-hidden flex items-center gap-x-2">
                     <i class="text-sm fa-solid fa-edit"></i>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, delectus.
-                </p>
+                </p> -->
                 <p class="font-thin flex items-center gap-x-2">
                     <i class="text-sm fa-solid fa-clock"></i>
-                    Joined July 2023
+                    Joined in: {{request.user.date_joined |date:"F Y"}}
                 </p>
             </div>
         </div>

@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="w-full h-auto grid grid-cols-4 gap-x-4 gap-y-6">
+<div class="w-full h-auto grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-x-4 gap-x-2 gap-y-6">
 
     <!-- Movie Card -->
     <!-- <div
@@ -167,8 +167,10 @@
         </a>
     </div>
     {%empty%}
-    <p class="p-5 text-center">
-        No videos found.
-    </p>
+    <div class="w-full col-span-4 h-auto flex items-center justify-center">
+        <h1 class="text-3xl font-bold text-neutral-300">
+            No Videos Found Yet (` ; `)
+        </h1>
+    </div>
     {% endfor %}
 </div>

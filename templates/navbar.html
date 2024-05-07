@@ -55,7 +55,7 @@
             {% if request.user.is_authenticated %}
             <!-- Profile image -->
             <a href="{% url 'accounts:profile' %}" class="text-base font-medium text-neutral-400">
-                <img src="https://source.unsplash.com/random/?women" alt="profile image"
+                <img src="{{request.user.get_profile_pic}}" alt="profile image"
                     class="w-10 h-10 p-0.5 rounded-full object-cover object-center border border-neutral-800/90">
             </a>
             <!-- Upload Video -->

@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
 from .managers import UserManager
 
 
@@ -61,7 +62,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def get_profile_pic(self):
         if not self.profile_picture:
-            return "https://sp-ao.shortpixel.ai/client/to_webp,q_glossy,ret_img,w_232,h_232/https://loanscanada.ca/wp-content/uploads/2018/04/Is-Bankruptcy-The-Answer-to-Student-Loan-Debt.png"
+            return "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
         else:
             return self.profile_picture.url
     

@@ -21,18 +21,19 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        videos = Video.objects.all()  # replace with your actual queryset
-        # videos = Video.objects.all()  # Assuming Video model has fields 'title', 'description', and 'file'
-        # context['video_src'] = choice(videos).video_file.url
-        # pk = self.kwargs.get('pk')
-        # print(pk)
-        selected_video = choice(videos)
-        # context['video_id'] = selected_video.pk
-        # print(context['video_id'])
-        context['video_src'] = selected_video.video_file.url
-        context['title'] = selected_video.title
-        context['description'] = selected_video.description
-        return context
+        videos = Video.objects.all()
+        if len(videos) > 0:
+            selected_video = choice(videos)
+            context['video_src'] = selected_video.video_file.url
+            context['title'] = selected_video.title
+            context['description'] = selected_video.description
+            return context
+        else:
+            # display default videos
+            context['video_src'] = '../static/video/video1.mp4'
+            context['title'] = "The Amazing Waterfall in the worlds"
+            context['description'] = "This is the default video. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+            return context
 
     # def get_recent_videos(self, **kwargs):
     #     context = super().get_context_data(**kwargs)
@@ -43,7 +44,7 @@ class HomeView(TemplateView):
 
     def get_recent_videos(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        recent_videos = Video.objects.all()
+        recent_videos = Video.objects.all().order_by('uploaded_at')
         context['recent_videos'] = recent_videos
         return context
     
