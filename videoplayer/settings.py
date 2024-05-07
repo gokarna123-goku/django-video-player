@@ -12,9 +12,9 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from decouple import config
-SECRET_KEY = config('SECRET_KEY')
-# SECRET_KEY = 'django-insecure-r96&gzo%wc4q^0hop#=lut*r$u$jd5s5t$d4l_yvw2ooaqm_&c'
+# from decouple import config
+# SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'django-insecure-r96&gzo%wc4q^0hop#=lut*r$u$jd5s5t$d4l_yvw2ooaqm_&c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -81,36 +81,11 @@ WSGI_APPLICATION = 'videoplayer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'goflix',
-        'HOST': 'localhost',
-        'USER': 'root',
-        'PASSWORD': '',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('DATABASE_NAME'),
-#         'USER': config('DATABASE_USER'),
-#         'PASSWORD': config('DATABASE_PASSWORD'),
-#         'HOST': config('DATABASE_HOST'),
-#         'PORT': config('DATABASE_PORT', cast=int),
-#     }
-# }
-
-# Email configuration
-# EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-# EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
-
-
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_USE_TLS = True
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_REDIRECT_URL = 'accounts:profile'
