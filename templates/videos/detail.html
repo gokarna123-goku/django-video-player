@@ -73,10 +73,10 @@
             <!-- Display Video comment section -->
             <div class="w-full h-auto space-y-3 text-neutral-500" id="comments">
                 {% if object.comments %}
-               {% for i in object.comments %}
+                {% for i in object.comments %}
                 <div class="w-full flex items-start gap-x-2">
-                    <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
-                        alt="profile image" class="w-12 h-12 p-0.5 rounded-full object-cover object-center">
+                    <img src="{{i.user.profile_picture.image.url}}" alt="profile image"
+                        class="w-12 h-12 p-0.5 rounded-full object-cover object-center">
                     <div class="space-y-2">
                         <div class="space-y-0.5">
                             <h1 class="text-base font-semibold text-neutral-300">
@@ -91,7 +91,7 @@
                         </p>
                     </div>
                 </div>
-               {%endfor%}
+                {%endfor%}
                 {% else %}
                 <p class="text-neutral-500 font-medium text-base">
                     No comments yet!
@@ -105,7 +105,7 @@
         <div class="col-span-1 rounded-md space-y-6">
 
             <!-- Channel name -->
-            <div class="w-full h-auto space-y-4 border-b border-neutral-900 pb-4">
+            <!-- <div class="w-full h-auto space-y-4 border-b border-neutral-900 pb-4">
                 <h1 class="text-base font-semibold text-neutral-400">
                     Published by
                 </h1>
@@ -122,7 +122,7 @@
                         </h1>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="space-y-3">
                 <!-- Video title -->
@@ -143,20 +143,26 @@
                     Write a comment
                 </h1>
                 <form action="" method="post">
-<div class="flex flex-col gap-y-5">
-    {% csrf_token %}
-    {{form.as_p}}
+                    <div class="flex flex-col gap-y-5">
+                        {% csrf_token %}
+                        {{form.as_p}}
 
-    <!-- Button -->
-    <div class="w-full h-auto flex items-center">
-        <button type="submit"
-            class="bg-red-500 text-neutral-950 font-medium text-base flex items-center justify-center px-5 py-2 rounded-md hover:bg-red-600 ease-in-out duration-300">
-            Post Comment
-        </button>
-    </div>
-</div>
+                        <!-- Button -->
+                        <div class="w-full h-auto flex items-center">
+                            {% if user.is_authenticated %}
+                            <button type="submit"
+                                class="bg-red-500 text-neutral-950 font-medium text-base flex items-center justify-center px-5 py-2 rounded-md hover:bg-red-600 ease-in-out duration-300">
+                                Post Comment
+                            </button>
+                            {% else %}
+                            <a href="{% url 'accounts:login' %}" class="bg-red-500 text-neutral-950 font-medium text-base flex items-center justify-center px-5 py-2 rounded-md hover:bg-red-600 ease-in-out duration-300">
+                                Log in to post comment
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
                 </form>
-                
+
             </div>
 
         </div>
@@ -218,7 +224,7 @@
     }
 
     function skipForward() {
-       video.currentTime = Math.max(0, video.currentTime + 5);
+        video.currentTime = Math.max(0, video.currentTime + 5);
     }
 
     function changeVolume() {
