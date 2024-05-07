@@ -30,5 +30,27 @@ class VideoComment(models.Model):
         ordering = ('-created_at',)
 
     def __str__(self):
-        return f"Comment by {self.user.email} on {self.video.title}"
+        return f"Comment by {self.user.first_name} {self.user.last_name} on {self.video.title}"
     
+
+class VideoLike(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+    
+    def __str__(self):
+        return f"Like by {self.user.first_name} {self.user.last_name} on {self.video.title}"
+
+class VideoDislike(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+
+    class Meta:
+        ordering = ('-created_at',)
+    
+    def __str__(self):
+        return f"Dislike by {self.user.first_name} {self.user.last_name} on {self.video.title}"

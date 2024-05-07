@@ -66,7 +66,6 @@ class VideoDetailView(DetailView):
     model = Video
     context_object_name = 'video'
 
-
     def get_object(self):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Video, pk=pk)
@@ -93,3 +92,11 @@ class VideoDetailView(DetailView):
             return HttpResponseRedirect(self.request.path_info +'#comments')
 
     
+    # Like and dislike logic here
+    def get(self, request, *args, **kwargs):
+        video = self.get_object()
+        if request.user in video.liked_by.all():
+            video.liked_by.remove(request.user)
+        else:
+            video.liked_by.add(request.user)
+        return HttpResponseRedirect(self.request.path_info)
