@@ -1,9 +1,11 @@
 from pyexpat.errors import messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView, TemplateView
 from random import choice
 from django.contrib.auth.decorators import login_required
+
+from django.db.models import Q 
 
 from .models import Video
 
@@ -93,3 +95,42 @@ class VideoDetailView(DetailView):
 
     
 
+class SearchView(ListView):
+    model = Video
+    template_name = 'search/search.html'
+    
+    def get(self, request, *args, **kwargs):
+        search_result = request.GET.get('search')
+        # if search_result:
+        #     search_videos = Video.objects.filter(Q(title__icontains=search_result) | Q(producer__icontains=search_result) | Q(genre__icontains=search_result))
+        if search_result:
+            search_videos = Video.objects.filter(
+            Q(title__icontains=search_result) |
+            Q(producer__icontains=search_result)
+            )
+        else:
+            print("Sorry, no results founds")
+        context = {
+            'search_videos': search_videos,
+        }
+        return render(request, self.template_name, context)
+
+
+# class SearchView(generic.ListView):
+#     template_name = 'search/search.html'
+#     def get(self, request, *args, **kwargs):
+#         search_result = request.GET.get('search')
+#         if search_result:
+#             restaurant_result = Restaurant.objects.filter(
+#                 Q(restaurant_name__icontains=search_result) |
+#                 Q(restaurant_address__icontains=search_result) | 
+#                 Q(restaurant_city__icontains=search_result)
+#                 )
+#             food_result = Food.objects.filter(Q(food_name__icontains=search_result))
+#         else:
+#             print("Sorry, no results founds")
+#         context = {
+#             'restaurant_result':restaurant_result,
+#             'food_result' : food_result,
+#         }
+#         return render(request, self.template_name, context)
