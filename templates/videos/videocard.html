@@ -150,18 +150,14 @@
                     <h1 class="text-xl font-bold text-neutral-300 cursor-pointer line-clamp-2 text-overflow-ellipsis">
                         {{video.title}}
                     </h1>
-                    <!-- <div class="w-full flex items-center gap-x-3">
-                        <img src="https://source.unsplash.com/random/?movie" alt="profile image"
-                            class="w-10 h-10 p-0.5 rounded-full object-cover object-center border border-neutral-800/90">
-                        <div>
-                            <h1 class="text-sm font-medium text-neutral-400">
-                                Gokarna Adhikari
-                            </h1>
-                            <h1 class="text-xs font-normal text-neutral-600">
-                                3 hours ago
-                            </h1>
+                    <div class="w-full flex items-center justify-between gap-x-3">
+                        <h6 class="text-sm text-neutral-500 font-normal">
+                            Produced by: {{video.producer}}
+                        </h6>
+                        <div class="bg-neutral-900 text-sm text-red-500 rounded-md w-fit px-2 py-1">
+                            {{object.age_rating}} Rated
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </a>

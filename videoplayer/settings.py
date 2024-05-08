@@ -12,9 +12,9 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# from decouple import config
-# SECRET_KEY = config('SECRET_KEY')
-SECRET_KEY = 'django-insecure-r96&gzo%wc4q^0hop#=lut*r$u$jd5s5t$d4l_yvw2ooaqm_&c'
+from decouple import config
+SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = 'django-insecure-r96&gzo%wc4q^0hop#=lut*r$u$jd5s5t$d4l_yvw2ooaqm_&c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -69,20 +69,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'videoplayer.wsgi.application'
 
 
-# AUTH_USER_MODEL = 'accounts.CustomUser'
-# LOGIN_REDIRECT_URL = 'accounts:profile'
-# LOGIN_URL = 'accounts:login'
-
-
-
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'goflix',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
