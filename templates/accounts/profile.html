@@ -43,86 +43,6 @@
 
     <!-- Your videos and activities -->
     <div class="w-full space-y-10 px-10">
-        <!-- Your videos -->
-        <div class="w-full space-y-3">
-            <h1 class="text-xl font-bold text-neutral-300">
-                Your Videos (03)
-            </h1>
-
-            <!-- Video Table -->
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <div class="p-4 bg-neutral-950 border-t-2 border-l-2 border-r-2 rounded-t-md border-neutral-900">
-                    <label for="table-search" class="sr-only">Search</label>
-                    <div
-                        class="max-w-md h-11 px-4 flex items-center gap-x-3 rounded-md bg-neutral-900 border border-neutral-900 text-sm font-normal text-neutral-300 placeholder-neutral-600 overflow-hidden">
-                        <i class="fa-solid fa-search"></i>
-                        <input type="text" id="table-search" class="w-full h-full bg-transparent outline-none"
-                            placeholder="Search for items">
-                    </div>
-                </div>
-                <table class="w-full text-sm text-left rtl:text-right text-neutral-500 dark:text-neutral-400">
-                    <thead class="text-xs text-neutral-400 uppercase bg-neutral-900">
-                        <tr>
-                            <th scope="col" class="p-5">
-                                <div class="flex items-center">
-                                    <input id="checkbox-all-search" type="checkbox"
-                                        class="w-4 h-4 text-red-600 bg-neutral-100 border-neutral-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-neutral-800 dark:focus:ring-offset-neutral-800 focus:ring-2 dark:bg-neutral-700 dark:border-neutral-600">
-                                    <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                                </div>
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Video Title
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Upload Date
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Category
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Size
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-neutral-900/60 hover:bg-neutral-800/60 cursor-pointer ease-in-out duration-300">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-search-1" type="checkbox"
-                                        class="w-4 h-4 text-red-600 bg-neutral-100 border-neutral-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-neutral-800 dark:focus:ring-offset-neutral-800 focus:ring-2 dark:bg-neutral-700 dark:border-neutral-600">
-                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-neutral-900 whitespace-nowrap dark:text-white">
-                                The Sliding Mr. Bones (Next Stop, Pottersville)
-                            </th>
-                            <td class="px-6 py-4">
-                                03-02-2024
-                            </td>
-                            <td class="px-6 py-4">
-                                Funny
-                            </td>
-                            <td class="px-6 py-4">
-                                256 MB
-                            </td>
-                            <td class="px-6 py-4 flex items-center gap-x-7">
-                                <a href="#" class="text-red-500 text-xl">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
-                                <a href="#" class="text-red-500 text-base">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
         <!-- Your activity -->
         <div class="w-full space-y-3">
             <h1 class="text-xl font-bold text-neutral-300">
@@ -130,8 +50,45 @@
             </h1>
 
             <!-- Activities -->
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                This is your activity page.
+            <div class="w-full flex-1 mt-5 px-4 py-5">
+                {% for user_act in liked_videos %}
+                <div class="w-full space-y-4">
+                    <!-- <h1 class="text-xl font-bold text-neutral-200">
+                        You Have Liked "<span class="text-red-500 text-2xl">{{user_act.count}}</span>" Videos Yet
+                    </h1> -->
+                    <div class="w-full h-auto grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 md:gap-x-4 gap-x-2 gap-y-6">
+                        <div
+                            class="w-full h-auto rounded-md rounded-md overflow-hidden hover:bg-neutral-900/20 cursor-pointer ease-in-out duration-300">
+                            <a href="#">
+                                <div class="w-full h-auto rounded-md overflow-hidden">
+                                    <img src="{{user_act.video_thumbnail.url}}" alt="video thumbnail"
+                                        class="w-full aspect-video object-cover object-center transition-all ease-in-out duration-300">
+                                    <div class="px-2 py-3 space-y-2">
+                                        <h1
+                                            class="text-xl font-bold text-neutral-300 cursor-pointer line-clamp-2 text-overflow-ellipsis">
+                                            {{user_act.title}}
+                                        </h1>
+                                        <div class="w-full flex items-center justify-between gap-x-3">
+                                            <h6 class="text-sm text-neutral-500 font-normal">
+                                                Produced by: {{user_act.producer}}
+                                            </h6>
+                                            <div class="bg-neutral-900 text-sm text-red-500 rounded-md w-fit px-2 py-1">
+                                                {{user_act.age_rating}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {%empty%}
+                <div class="w-full space-y-6 h-auto flex-col py-10 flex items-center justify-center">
+                    <h1 class="text-3xl font-bold text-neutral-300">
+                        You Have No Activity Yet!
+                    </h1>
+                </div>
+                {% endfor %}
             </div>
 
         </div>

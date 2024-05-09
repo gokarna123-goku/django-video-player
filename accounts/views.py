@@ -1,12 +1,13 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import FormView, TemplateView, CreateView
-from django.contrib.auth import authenticate, login
-from .forms import RegisterForm, LoginForm
+from django.views.generic import FormView, TemplateView, CreateView, ListView
+
+from home.models import Video
+
+from .forms import RegisterForm
 from .models import CustomUser
 from django.contrib.auth.views import LoginView, LogoutView
-# from django.contrib.auth.views import LogoutView
 from django.contrib.auth import login as auth_login
 
 
@@ -26,9 +27,6 @@ class RegisterView(FormView):
     
     def get_success_url(self):
         return reverse_lazy('accounts:login')
-
-
-
 
 
 class UserLoginView(LoginView):
@@ -61,9 +59,6 @@ class UserLoginView(LoginView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-    
-
-
 # Logout View
 class UserLogoutView(LogoutView):
     next_page='accounts:login'
@@ -77,7 +72,6 @@ class UserLogoutView(LogoutView):
         return reverse_lazy('accounts:login')
 
 
-
 class UserProfileView(TemplateView):
     template_name = 'accounts/profile.html'
     model = CustomUser
@@ -86,3 +80,17 @@ class UserProfileView(TemplateView):
     def get_object(self, queryset=None):
         return self.request.user
     
+
+# Getting all videos that user liked
+
+class UserActivityView(ListView):
+    model = Video
+    template_name = 'accounts/profile.html'
+    context_object_name = 'activity'
+
+    def get_queryset(self):
+        liked_videos = self.request.user.liked_videos.all()
+        print(liked_videos)
+        commented_videos = self.request.user.commented_videos.all()
+        print(commented_videos)
+        return liked_videos | commented_videos | self.request.user.uploaded_videos.all()
