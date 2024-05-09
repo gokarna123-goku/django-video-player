@@ -1,6 +1,7 @@
 from pyexpat.errors import messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, TemplateView
 from random import choice
 from django.contrib.auth.decorators import login_required
@@ -114,3 +115,68 @@ class SearchView(ListView):
             'search_videos': search_videos,
         }
         return render(request, self.template_name, context)
+
+# Like and dislike video
+
+# class LikeView(TemplateView):
+#     template_name = "videos/detail.html"
+#     model = Video
+#     context_object_name = 'video'
+
+#     def post(self, request, pk):  # Add 'pk' parameter here
+#         # video = self.get_object()
+#         video = get_object_or_404(Video, pk=pk)
+#         if request.user in video.like.all():
+#             video.like.remove(request.user)
+#         elif request.user in video.dislike.all():
+#             video.dislike.remove(request.user)
+#         else:
+#             video.like.add(request.user)
+#         return redirect('home:detail', pk=video.pk)
+
+
+# from django.http import HttpResponseRedirect
+
+class LikeView(TemplateView):
+    template_name = "videos/detail.html"
+    model = Video
+    context_object_name = 'video'
+
+    def post(self, request, pk):  
+        video = get_object_or_404(Video, pk=pk)
+        
+        for user in video.like.all():
+            if user == request.user:
+                video.like.remove(request.user)
+                break
+        
+        for user in video.dislike.all():
+            if user == request.user:
+                video.dislike.remove(request.user)
+                break
+        
+        video.like.add(request.user)
+        return HttpResponseRedirect(reverse('home:detail', kwargs={'pk': video.pk}))
+
+
+class DislikeView(TemplateView):
+    template_name = "videos/detail.html"
+    model = Video
+    context_object_name = 'video'
+
+    def post(self, request, pk):
+        video = get_object_or_404(Video, pk=pk)
+        
+        for user in video.dislike.all():
+            if user == request.user:
+                video.dislike.remove(request.user)
+                break
+        
+        for user in video.like.all():
+            if user == request.user:
+                video.like.remove(request.user)
+                break
+        
+        video.dislike.add(request.user)
+        return HttpResponseRedirect(reverse('home:detail', kwargs={'pk': video.pk}))
+

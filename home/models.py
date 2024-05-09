@@ -19,6 +19,8 @@ class Video(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     producer = models.CharField(max_length=100)
     age_rating = models.CharField(max_length=100)
+    like = models.ManyToManyField(CustomUser, related_name="like", blank=True, null=True)
+    dislike = models.ManyToManyField(CustomUser, related_name="dislike", blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -27,7 +29,6 @@ class Video(models.Model):
     @property
     def comments(self):
         return VideoComment.objects.filter(video=self)
-
 
 
 class VideoComment(models.Model):

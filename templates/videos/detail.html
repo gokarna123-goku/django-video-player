@@ -49,17 +49,26 @@
             <!-- Video actions -->
             <div class="w-full h-auto flex items-center justify-between px-3 pb-3.5 border-b border-neutral-900/50">
                 <div class="flex items-center bg-neutral-900 rounded-md px-2">
-                    <button
-                        class="text-neutral-300 text-xl py-1 px-2 border-r border-neutral-800 flex items-center justify-center gap-x-2">
-                        <i class="fa-regular fa-thumbs-up"></i>
-                        <span class="text-base">
-                            0
-                        </span>
-                    </button>
-                    <button
-                        class="text-neutral-300 text-xl py-1 pl-3.5 pr-2 border-l border-neutral-800 flex items-center justify-center">
-                        <i class="fa-regular fa-thumbs-down"></i>
-                    </button>
+                    <form action="{% url 'home:like' object.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit"
+                            class="text-neutral-300 text-xl py-1 px-2 border-r border-neutral-800 flex items-center justify-center gap-x-2">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                            <span class="text-base">
+                                {{object.like.count}}
+                            </span>
+                        </button>
+                    </form>
+                    <form action="{% url 'home:dislike' object.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit"
+                            class="text-neutral-300 text-xl py-1 px-2 border-l border-neutral-800 flex items-center justify-center gap-x-2">
+                            <i class="fa-regular fa-thumbs-down"></i>
+                            <span class="text-base">
+                                {{object.dislike.count}}
+                            </span>
+                        </button>
+                    </form>
                 </div>
                 <div>
                     <button
