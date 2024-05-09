@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import FormView, TemplateView
+from django.views.generic import FormView, TemplateView, View
+
+from django.contrib.auth import logout
 
 from home.models import Video
 
@@ -60,16 +62,11 @@ class UserLoginView(LoginView):
 
 
 # Logout View
-class UserLogoutView(LogoutView):
-    next_page='accounts:login'
+class UserLogoutView(View):
 
-    def dispatch(self, request, *args, **kwargs):
-        response = super().dispatch(request, *args, **kwargs)
-        messages.add_message(request, messages.SUCCESS, "You have logged out. Login again.")
-        return response
-
-    def get_success_url(self):
-        return reverse_lazy('accounts:login')
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('accounts:login')
 
 
 class UserProfileView(TemplateView):
