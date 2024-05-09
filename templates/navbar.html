@@ -26,7 +26,7 @@
             </li>
             {% if request.user.is_authenticated %}
             <li>
-                <a href="#"
+                <a href="{% url 'home:likedvideos' %}"
                     class="text-decoration-none text-base font-medium text-neutral-400 hover:text-red-500 ease-in-out duration-300">
                     Liked
                 </a>
@@ -55,15 +55,6 @@
                 <img src="{{request.user.get_profile_pic}}" alt="profile image"
                     class="w-10 h-10 p-0.5 rounded-full object-cover object-center border border-neutral-800/90">
             </a>
-            <!-- Upload Video -->
-            <!-- <a href="{% url 'accounts:profile' %}"
-                class="w-fit bg-red-700 px-4 py-2 rounded-md text-sm font-medium text-neutral-200 hover:bg-red-600 flex items-center gap-x-2 ease-in-out duration-500">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                Upload
-            </a> -->
-            <!-- <a href="{% url 'accounts:profile' %}" class="w-10 h-10 rounded-full flex items-center justify-center bg-red-500/30 font-medium text-neutral-100 p-0.5 border border-neutral-800/90">
-                <i class="fa-solid fa-arrow-up-from-bracket"></i>
-            </a> -->
             {% else %}
             <a href="{% url 'accounts:login' %}"
                 class="w-fit bg-red-700 px-4 py-2 rounded-full text-sm font-medium text-neutral-200 hover:bg-red-600 ease-in-out duration-500">
@@ -107,24 +98,3 @@
     })
 </script>
 
-
-<!-- <script>
-    const navbar = document.getElementById('navbar');
-    // const btnsToggle = document.getElementById('btnToggle');
-
-    // Toggle navbar on mobile
-    // btnsToggle.addEventListener('click', () => {
-    //     navbar.classList.toggle('translate-y-full');
-    // });
-
-    // Toggle fixed navbar on scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 5) {
-            navbar.classList.add('bg-red-600', 'text-neutral-900', 'shadow', 'fixed', 'w-full', 'z-50', 'top-0');
-            navbar.classList.remove('bg-neutral-900', 'text-white');
-        } else {
-            navbar.classList.add('bg-neutral-900');
-            navbar.classList.remove('bg-red-600', 'text-neutral-900', 'shadow');
-        }
-    });
-</script> -->

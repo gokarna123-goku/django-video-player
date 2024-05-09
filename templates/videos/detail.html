@@ -49,6 +49,7 @@
             <!-- Video actions -->
             <div class="w-full h-auto flex items-center justify-between px-3 pb-3.5 border-b border-neutral-900/50">
                 <div class="flex items-center bg-neutral-900 rounded-md px-2">
+                    {% if user.is_authenticated %}
                     <form action="{% url 'home:like' object.pk %}" method="POST">
                         {% csrf_token %}
                         <button type="submit"
@@ -59,6 +60,18 @@
                             </span>
                         </button>
                     </form>
+                    {% else %}
+                    <a href="{% url 'accounts:login' %}"
+                        class="text-neutral-300 text-xl py-1 px-2 border-r border-neutral-800 flex items-center justify-center gap-x-2">
+                        <i class="fa-regular fa-thumbs-up"></i>
+                        <span class="text-base">
+                            {{object.like.count}}
+                        </span>
+                    </a>
+                    {% endif %}
+
+                    <!-- Dislike button -->
+                    {% if user.is_authenticated %}
                     <form action="{% url 'home:dislike' object.pk %}" method="POST">
                         {% csrf_token %}
                         <button type="submit"
@@ -69,6 +82,15 @@
                             </span>
                         </button>
                     </form>
+                    {% else %}
+                    <a href="{% url 'accounts:login' %}"
+                        class="text-neutral-300 text-xl py-1 px-2 border-r border-neutral-800 flex items-center justify-center gap-x-2">
+                        <i class="fa-regular fa-thumbs-down"></i>
+                        <span class="text-base">
+                            {{object.dislike.count}}
+                        </span>
+                    </a>
+                    {% endif %}
                 </div>
                 <div>
                     <button
@@ -192,11 +214,7 @@
     </div>
 
     <!-- Separator -->
-    <hr class="my-14 border-b border-neutral-900">
-
-    <!-- Related section -->
-    {% include 'videos/related/related.html' %}
-
+    <!-- <hr class="my-14 border-b border-neutral-900"> -->
 
 </div>
 

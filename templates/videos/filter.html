@@ -7,44 +7,33 @@
         Showing <span class="text-red-500">" {{videos.count}} "</span> results
     </div>
 
-    <!-- Sort dropdown -->
-    <!-- <div class="flex items-center gap-2">
-        Sort by
-        <select name="sort" id="sort"
-            class="bg-neutral-900/30 text-neutral-500 text-base font-medium border border-neutral-800/60 rounded-md px-4 py-2">
-            <option value="latest">Latest</option>
-            <option value="oldest">Oldest</option>
-        </select>
-    </div> -->
-
-
     <button id="multiLevelDropdownButton" data-dropdown-toggle="multi-dropdown"
         class="text-neutral-200 bg-red-500/20 hover:bg-red-600/30 outline-none font-medium rounded-md text-sm px-5 py-2.5 text-center inline-flex items-center ease-in-out duration-500"
-        type="button">Dropdown button <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+        type="button">Sort By Category
+        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 10 6">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="m1 1 4 4 4-4" />
         </svg>
     </button>
 
     <!-- Dropdown menu -->
-    <div id="multi-dropdown"
-        class="z-10 hidden bg-neutral-800 rounded-md shadow-md w-44">
+    <div id="multi-dropdown" class="z-10 hidden bg-neutral-800 rounded-md shadow-md min-w-40 max-w-52 w-fit">
         <ul class="text-sm text-neutral-300 rounded-md overflow-hidden" aria-labelledby="multiLevelDropdownButton">
+            {% if filter_videos is None %}
             <li>
-                <a href="#"
-                    class="block px-4 py-2 hover:bg-neutral-900">Dashboard</a>
+                <a href="{% url 'home:video' %}" class="block px-4 py-2 hover:bg-neutral-900">All</a>
             </li>
+            {% else %}
+            {% for genre in filter_videos %}
             <li>
-                <a href="#"
-                    class="block px-4 py-2 hover:bg-neutral-900">Earnings</a>
+                <a href="{% url 'filter' genre.genre %}" class="block px-4 py-2 hover:bg-neutral-900">
+                    {{ genre.genre}}
+                </a>
             </li>
-            <li>
-                <a href="#" class="block px-4 py-2 hover:bg-neutral-900">Sign
-                    out</a>
-            </li>
+            {% endfor %}
+            {% endif %}
         </ul>
     </div>
 
 </div>
-

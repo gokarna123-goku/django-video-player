@@ -4,7 +4,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, TemplateView
 from random import choice
-from django.contrib.auth.decorators import login_required
 
 from django.db.models import Q 
 
@@ -38,11 +37,6 @@ class HomeView(TemplateView):
             context['description'] = "This is the default video. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
             return context
 
-    # def get_recent_videos(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     recent_videos = Video.objects.all().order_by('uploaded_at')
-    #     context['recent_videos'] = recent_videos  # Update the key to 'recent_videos'
-    #     return context
 
 
     def get_recent_videos(self, **kwargs):
@@ -95,7 +89,7 @@ class VideoDetailView(DetailView):
             return HttpResponseRedirect(self.request.path_info +'#comments')
 
     
-
+# Search view
 class SearchView(ListView):
     model = Video
     template_name = 'search/search.html'
@@ -116,27 +110,10 @@ class SearchView(ListView):
         }
         return render(request, self.template_name, context)
 
+
 # Like and dislike video
 
-# class LikeView(TemplateView):
-#     template_name = "videos/detail.html"
-#     model = Video
-#     context_object_name = 'video'
-
-#     def post(self, request, pk):  # Add 'pk' parameter here
-#         # video = self.get_object()
-#         video = get_object_or_404(Video, pk=pk)
-#         if request.user in video.like.all():
-#             video.like.remove(request.user)
-#         elif request.user in video.dislike.all():
-#             video.dislike.remove(request.user)
-#         else:
-#             video.like.add(request.user)
-#         return redirect('home:detail', pk=video.pk)
-
-
-# from django.http import HttpResponseRedirect
-
+# Like view
 class LikeView(TemplateView):
     template_name = "videos/detail.html"
     model = Video
@@ -158,7 +135,7 @@ class LikeView(TemplateView):
         video.like.add(request.user)
         return HttpResponseRedirect(reverse('home:detail', kwargs={'pk': video.pk}))
 
-
+# Dislike view
 class DislikeView(TemplateView):
     template_name = "videos/detail.html"
     model = Video
@@ -180,3 +157,25 @@ class DislikeView(TemplateView):
         video.dislike.add(request.user)
         return HttpResponseRedirect(reverse('home:detail', kwargs={'pk': video.pk}))
 
+
+
+# Getting all vides that user liked
+
+class LikedVideosView(ListView):
+    model = Video
+    template_name = 'accounts/liked.html'
+    context_object_name = 'liked_videos'
+
+    def get_queryset(self):
+        return Video.objects.filter(like=self.request.user)
+
+
+
+# Filter by genre
+class FilterView(ListView):
+    model = Video
+    template_name = 'videos/video.html'
+    context_object_name = 'filter_videos'
+
+    def get_queryset(self):
+        return Video.objects.filter(genre=self.kwargs['genre'])
