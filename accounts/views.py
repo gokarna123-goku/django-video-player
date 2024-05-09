@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import FormView, TemplateView, CreateView, ListView
+from django.views.generic import FormView, TemplateView
 
 from home.models import Video
 
@@ -81,16 +81,10 @@ class UserProfileView(TemplateView):
         return self.request.user
     
 
-# Getting all videos that user liked
-
-class UserActivityView(ListView):
-    model = Video
-    template_name = 'accounts/profile.html'
-    context_object_name = 'activity'
-
-    def get_queryset(self):
-        liked_videos = self.request.user.liked_videos.all()
-        print(liked_videos)
-        commented_videos = self.request.user.commented_videos.all()
-        print(commented_videos)
-        return liked_videos | commented_videos | self.request.user.uploaded_videos.all()
+    # Get user activity like commented and liked videos
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['liked_videos'] = Video.objects.filter(like=self.request.user)
+        print(context['liked_videos'])
+        return context
+    
