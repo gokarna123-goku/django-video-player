@@ -2,7 +2,6 @@ from pathlib import Path
 import os
 from .jazzmin import JAZZMIN_SETTINGS
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
 STATIC_DIR = os.path.join(BASE_DIR,'static')
@@ -12,12 +11,12 @@ MEDIA_DIR = os.path.join(BASE_DIR,'media')
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from decouple import config
-SECRET_KEY = config('SECRET_KEY')
-# SECRET_KEY = 'django-insecure-r96&gzo%wc4q^0hop#=lut*r$u$jd5s5t$d4l_yvw2ooaqm_&c'
+# from decouple import config
+# SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = 'django-insecure-r96&gzo%wc4q^0hop#=lut*r$u$jd5s5t$d4l_yvw2ooaqm_&c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
